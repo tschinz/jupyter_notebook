@@ -1701,6 +1701,11 @@ div#notebook {
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><span class="math">\(if(pixel_{offset} * \frac{dpi_{img}}{dpi_{ph}} = integer)\)</span></p>
 <p>Possible in FPGA if <span class="math">\(integer = multiple_of(2)\)</span></p>
+<p><strong>Other Restrictions are (not considerated in the calculation)</strong></p>
+<ul>
+<li>ErgoSoft Rip can only create images with a DPI of max <span class="math">\(2400dpi\)</span></li>
+<li>The Speed of the machine is limited. with <span class="math">\(360dpi\)</span> default speed if <span class="math">\(840\frac{mm}{s}\)</span>. At <span class="math">\(180dpi\)</span> default speed should be <span class="math">\(1680\frac{mm}{s}\)</span>, but in the Siemens PLC only 3 digits are used to set the print speed. Higher speeds are also not tested on the Digiround.</li>
+</ul>
 </div>
 </div>
 </div>

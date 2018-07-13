@@ -1,0 +1,54 @@
+  1461145169.000            wireshark version                 = 1.10.3
+  1461145169.000            wsgd generation data :
+  1461145169.000            - wireshark compilation version   = 1.10.0
+  1461145169.000            - WIRESHARK_VERSION_NUMBER        = 11000
+  1461145169.000            - compilation date                = Jun  9 2013
+  1461145169.000            - compiler                        = Visual C++ 1600
+  1461145169.000            get_progfile_dir     = C:\Program Files (x86)\Wireshark
+  1461145169.000            get_plugin_dir       = C:\Program Files (x86)\Wireshark\plugins\1.10.3
+  1461145169.000            get_datafile_dir     = C:\Program Files (x86)\Wireshark
+  1461145169.000            get_systemfile_dir   = C:\Program Files (x86)\Wireshark
+  1461145169.000            get_profiles_dir     = C:\Users\zas\AppData\Roaming\Wireshark\profiles
+  1461145169.000            get_persdatafile_dir = \\s01\home$\zas
+  1461145169.000            locale LC_ALL         = German_Switzerland.1252
+  1461145169.000            locale LC_COLLATE     = German_Switzerland.1252
+  1461145169.000            locale LC_CTYPE       = German_Switzerland.1252
+  1461145169.000            locale LC_MONETARY    = German_Switzerland.1252
+  1461145169.000            locale LC_NUMERIC     = German_Switzerland.1252
+  1461145169.000            locale LC_TIME        = German_Switzerland.1252
+  1461145169.000      Enter cpp_proto_register_generic 
+  1461145169.000      Enter get_files_in_dir dir_name=C:\Users\zas\AppData\Roaming\Wireshark\profiles  begin_file_name=  end_file_name=.wsgd
+E 1461145169.000            filter C:\Users\zas\AppData\Roaming\Wireshark\profiles\*.wsgd not found
+  1461145169.000      Leave get_files_in_dir
+  1461145169.000      Enter get_files_in_dir dir_name=\\s01\home$\zas  begin_file_name=  end_file_name=.wsgd
+E 1461145169.000    3       filter \\s01\home$\zas\*.wsgd not found
+  1461145169.000      Leave get_files_in_dir
+  1461145169.000      Enter get_files_in_dir dir_name=C:\Program Files (x86)\Wireshark  begin_file_name=  end_file_name=.wsgd
+  1461145169.000      Leave get_files_in_dir
+  1461145169.000      Enter set_max_nb_of_protocol_data 2
+  1461145169.000      Leave set_max_nb_of_protocol_data
+  1461145169.000      Enter cpp_proto_register_generic wsgd_file_name=C:\Program Files (x86)\Wireshark\calmar-session.wsgd
+  1461145169.000      Enter read_file_wsgd C:\Program Files (x86)\Wireshark\calmar-session.wsgd
+  1461145169.000    2       PROTONAME = Calmar Session Protocol
+  1461145169.000            PROTOSHORTNAME = calmarsp
+  1461145169.000            PROTOABBREV = calmarsp
+  1461145169.000            PARENT_SUBFIELD = udp.port
+  1461145169.000            MSG_HEADER_TYPE = T_common_session_header
+  1461145169.000            MSG_ID_FIELD_NAME = method
+  1461145169.000            MSG_MAIN_TYPE = T_method_switch(method)
+  1461145169.000            MANAGE_WIRESHARK_PINFO = 1
+  1461145169.000    7 Leave read_file_wsgd
+  1461145169.000      Leave cpp_proto_register_generic
+  1461145169.000      Enter cpp_proto_register_generic wsgd_file_name=C:\Program Files (x86)\Wireshark\calmar.wsgd
+  1461145169.000      Enter read_file_wsgd C:\Program Files (x86)\Wireshark\calmar.wsgd
+  1461145169.000    2       PROTONAME = Calmar Data Transfer Protocol
+  1461145169.000            PROTOSHORTNAME = Calmar
+  1461145169.000            PROTOABBREV = calmar
+  1461145169.000            PARENT_SUBFIELD = udp.port
+  1461145169.000            MSG_HEADER_TYPE = T_transport_header
+  1461145169.000            MSG_ID_FIELD_NAME = transport_command
+  1461145169.000            MSG_MAIN_TYPE = T_transport_command_switch(transport_command)
+  1461145169.000            MANAGE_WIRESHARK_PINFO = 1
+  1461145169.000    6 Leave read_file_wsgd
+  1461145169.000      Leave cpp_proto_register_generic
+  1461145169.000      Leave cpp_proto_register_generic

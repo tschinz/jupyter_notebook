@@ -1,0 +1,9 @@
+{
+  "secure": false, 
+  "url": "http://localhost:8888/", 
+  "hostname": "localhost", 
+  "pid": 8032, 
+  "base_url": "/", 
+  "notebook_dir": "C:\\Program Files\\WinPython-64bit-2.7.9.4\\notebooks", 
+  "port": 8888
+}

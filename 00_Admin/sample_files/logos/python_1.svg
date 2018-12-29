@@ -1,0 +1,17 @@
+<svg xmlns='http://www.w3.org/2000/svg' version='1.1' viewBox='0 0 111 111' xmlns:xlink='http://www.w3.org/1999/xlink'>
+  <defs>
+    <linearGradient gradientTransform='rotate(45)' id='yellow'>
+      <stop offset='0.4' stop-color='#da1'/>
+      <stop offset='1' stop-color='#fe5'/>
+    </linearGradient>
+    <linearGradient gradientTransform='rotate(45)' id='blue'>
+      <stop offset='0.4' stop-color='#69f'/>
+      <stop offset='1' stop-color='#468'/>
+    </linearGradient>
+    <path id='snake' d='M55,0c-27,2-29,3-28,25h28c0,4,1,4-2,4h-38c-9,1-13,10-14,18c-2,20,1,35,24,35c0-6-1-12,1-19c9-21,55,3,56-23c0-29,4-38-27-40'/>
+  </defs>
+  <use x='0' y='0' xlink:href='#snake' fill='url(#blue)'/>
+  <use x='0' y='0' xlink:href='#snake' transform='rotate(180 55 55)' fill='url(#yellow)'/>
+  <circle cx='40' cy='13' fill='#fff' r='4.5'/>
+  <circle cx='70' cy='97' fill='#fff' r='4.5'/>
+</svg>

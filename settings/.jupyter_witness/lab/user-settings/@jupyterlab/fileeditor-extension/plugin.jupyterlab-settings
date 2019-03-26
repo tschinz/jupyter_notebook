@@ -1,0 +1,16 @@
+{
+    // Text Editor
+    "editorConfig": {
+      "autoClosingBrackets": false,
+      "fontFamily": null,
+      "fontSize": null,
+      "lineHeight": null,
+      "lineNumbers": true,
+      "lineWrap": "on",
+      "matchBrackets": true,
+      "readOnly": false,
+      "insertSpaces": true,
+      "tabSize": 2,
+      "wordWrapColumn": 80
+    }
+}

@@ -1,0 +1,46 @@
+{
+    // Code Cell Configuration
+    "codeCellConfig": {
+      "autoClosingBrackets": true,
+      "fontFamily": null,
+      "fontSize": null,
+      "lineHeight": null,
+      "lineNumbers": true,
+      "lineWrap": "off",
+      "matchBrackets": true,
+      "readOnly": false,
+      "insertSpaces": true,
+      "tabSize": 2,
+      "wordWrapColumn": 80
+    },
+
+    // Markdown Cell Configuration
+    "markdownCellConfig": {
+      "autoClosingBrackets": false,
+      "fontFamily": null,
+      "fontSize": null,
+      "lineHeight": null,
+      "lineNumbers": false,
+      "lineWrap": "off",
+      "matchBrackets": false,
+      "readOnly": false,
+      "insertSpaces": true,
+      "tabSize": 2,
+      "wordWrapColumn": 80
+    },
+
+    // Raw Cell Configuration
+    "rawCellConfig": {
+      "autoClosingBrackets": false,
+      "fontFamily": null,
+      "fontSize": null,
+      "lineHeight": null,
+      "lineNumbers": false,
+      "lineWrap": "on",
+      "matchBrackets": false,
+      "readOnly": false,
+      "insertSpaces": true,
+      "tabSize": 2,
+      "wordWrapColumn": 80
+    }
+}

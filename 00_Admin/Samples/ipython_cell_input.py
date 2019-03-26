@@ -1,1 +1,0 @@
-%lprun -f estimate_pi estimate_pi()

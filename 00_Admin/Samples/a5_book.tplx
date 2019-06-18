@@ -1,0 +1,52 @@
+((*- extends 'article.tplx' -*))
+
+((* block docclass *))
+\documentclass[9pt, reprint, floatfix, groupaddress, prb, twoside]{book}
+
+% Use a wider inner margin for the two-sided book
+\usepackage[a5paper, margin=0.5in, inner=1in]{geometry}
+
+% Ignore future geometry commands with optional and mandatory arguments
+\usepackage{xparse}
+\RenewDocumentCommand{\geometry}{om}{%
+}
+
+% Let all figures float 'H'ere
+\usepackage{float}
+\floatplacement{figure}{H}
+
+((* endblock docclass *))
+
+% Author and Title from metadata
+((* block maketitle *))
+
+((*- if nb.metadata["latex_metadata"]: -*))
+((*- if nb.metadata["latex_metadata"]["author"]: -*))
+\author{((( nb.metadata["latex_metadata"]["author"] )))}
+((*- endif *))
+((*- endif *))
+
+((*- if nb.metadata["latex_metadata"]: -*))
+((*- if nb.metadata["latex_metadata"]["title"]: -*))
+\title{((( nb.metadata["latex_metadata"]["title"] )))}
+((*- endif *))
+((*- else -*))
+\title{((( resources.metadata.name )))}
+((*- endif *))
+
+\date{\today}
+\maketitle
+
+((*- if nb.metadata["latex_metadata"]: -*))
+((*- if nb.metadata["latex_metadata"]["chapter"]: -*))
+((*- if nb.metadata["latex_metadata"]["chapter"]["setcounter"]: -*))
+\setcounter{chapter}{((( nb.metadata["latex_metadata"]["chapter"]["setcounter"] )))}
+((*- endif *))
+
+((*- if nb.metadata["latex_metadata"]["chapter"]["title"]: -*))
+\chapter{((( nb.metadata["latex_metadata"]["chapter"]["title"] )))}
+((*- endif *))
+((*- endif *))
+((*- endif *))
+
+((* endblock maketitle *))

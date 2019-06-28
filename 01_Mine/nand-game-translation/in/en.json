@@ -1,0 +1,355 @@
+{
+    "missions": {
+        "INV": {
+            "title": "Invert",
+            "splash": "<p>Welcome to <b>The Nand Game</b>!</p>\n <p>You are going to build a simple computer.\n <p>You start with a single component, the <b>nand</b> gate.\n Using this as the fundamental building block, you will build all other components necessary.\n\n <p>Your first task is to build an <b>inverter</b> component.\n <p>Read to the left of the diagram for the exact specification of the task.\n Below the diagram is further elaboration which might be helpful.",
+            "specification": "<p>The first task is to build an inverter (<b>inv</b>) component.\n\n <p>An <b>inv</b>-component has a single input and a single output.\n <p>The output should be the opposite of the input, so 0 for 1 and vice versa.\n\n <p>Components are typically specified with a table showing inputs and outputs, like this:",
+            "hints": [
+                {
+                    "html": "<b>Step 1:</b> Drag components from the toolbox to the blue area."
+                },
+                {
+                    "html": "<b>Step 2:</b> Tap arrow to select, then tap a source connector on a component to create a connection."
+                },
+                {
+                    "html": "Specification for the component to build. <p>For every input the component should produce the correct output."
+                },
+                {
+                    "html": "Click checkbox to toggle the input signal and see how it affects the circuit."
+                },
+                {
+                    "html": "Click here when you believe you have designed the component correctly."
+                }
+            ],
+            "elaboration": "<h3>Introduction</h3>\n <p>The Nand Game takes you though building a working computer, starting from the most basic components.\n It does not require any prerequisites, in particular it does not require any previous knowledge about computer architecture or software,\n and does not require math skills beyond addition and subtraction.\n It does require some patience—some of the tasks might take a while to solve.\n\n <p>The game consists of a series of levels.\n In each level you are tasked with building a component that behaves according to a specification.\n This component can then be used as a building-block in the next level.\n\n <p>All components are specified through what input should lead to what output.\n How exactly you build the component is up to you, as long as\n input/output conforms to the specification. The game doesn't care whether or not you have found the simplest or the most efficient design.\n It only cares if it works correctly.  \n\n <p>The first challenge is to build an <b>inverter</b> component.\n <p>The <b>inverter</b> has a single input and a single output, and the specification look like this:\n\n <table class='data'>\n <tr><th>Input</th><th>Output</th></tr>\n <tr><td>0</td><td>1</td></tr>\n <tr><td>1</td><td>0</td></tr>\n </table>\n\n <h3>The Nand gate</h3>\n\n <p>The only component available in the first level is the <b>nand</b> gate. The nand gate is a fundamental building block which all other components can be built from.\n\n <p>A <b>nand</b> gate has two inputs and one output, and the specification is like this:\n\n <table class='data'>\n <tr><th colspan=2>Input</th><th>Output</th></tr>\n <tr><th>a</th><th>b</th><th></th></tr>\n <tr><td>0</td><td>0</td><td>1</td></tr>\n <tr><td>1</td><td>0</td><td>1</td></tr>\n <tr><td>0</td><td>1</td><td>1</td></tr>\n <tr><td>1</td><td>1</td><td>0</td></tr>\n </table>\n\n <p>To see the specification for a component, click its 🛈 icon.\n\n <h3>User guide</h3>\n\n <p>The objective for the level is always described in the box to left of the canvas.\n The text below the canvas (what you are reading now) contains additional information and hints.\n\n <p>You build the circuit by dragging components\n from the toolbox left of the canvas, and connect them by dragging the arrowheads from the output-connectors to input-connectors.\n\n <p>You can manually test the circuit by toggling the input box at the bottom (the small checkbox).\n\n <p>When you believe you have designed the component correctly, click \"I have completed the level\".\n The system verifies if the circuit you have designed corresponds to the specification. If it does you can proceed to the next level.\n\n <div class=subject>\n <h3>About 0 and 1</h3>\n <p>Input and output signals can be either 0 or 1.\n There is no other option or middle ground. This reflects the fundamental principle of digital systems:\n They only distinguish between two distinct states.\n In an electrical circuit this corresponds to high and low current. But we don't care about how it works on the physical level, we just treat them as logical states.\n </div>\n\n <div class=subject>\n <h3>Where does the NAND-gate come from?</h3>\n <p>In this game we use the <b>nand</b>-gate as the most fundamental building blocks. The nand gate itself is built from transistors. A transistor is basically an electrical switch.\n A nand gate is built from two or four transistors, depending on the type of transistors used.\n </div>",
+            "debriefing": "The <b>inv</b>-component have now been added to your toolbox and can be used as a building block in the next levels."
+        },
+        "AND": {
+            "title": "And",
+            "splash": "<p>The next task is to build an <b>and</b> gate using only <b>nand</b> and <b>inv</b> components.\n (You might not need both kinds to solve this task.)",
+            "specification": "<p>An <b>and</b> gate output is 1 when both inputs are 1:",
+            "hints": [
+                {
+                    "html": "The <b>inv</b> component have been added to the toolbox now."
+                }
+            ],
+            "spoilers": "<p>Hint: <span class=\"spoiler\">\"NAND\" is actually an abbreviation of \"Negative AND\"</span>"
+        },
+        "OR": {
+            "title": "Or",
+            "specification": "<p>An <b>or</b> gate output is 1 when at least one input is 1:"
+        },
+        "XOR": {
+            "title": "Xor",
+            "specification": "<p>An <b>xor</b> gate output is 1 when the two inputs are different:",
+            "elaboration": "XOR is short for <i>Exclusive OR</i>. It means <i>either a or b but not both</i>."
+        },
+        "HALFADD": {
+            "title": "Half Adder",
+            "splash": "<p>Congratulations, you have built the fundamental logic gates.\n <p>The next step is arithmetics. The processor needs to be able to add and subtract numbers.\n\n <p>The first task is to add two one-bit numbers together. The result will be a two-bit number\n <p>You will need to understand the binary number system to solve this.",
+            "specification": "<p>An <b>add</b> component which adds two bits. The output is a two-bit value.\n <p>The <b>h</b> output is the high bit, the <b>l</b> is the low bit.",
+            "elaboration": "<div class=subject>\n\n <h3>Binary numbers</h3>\n\n <p>Computers perform arithmetics using the <b>binary numbering system</b>.\n\n <p>In binary, all numbers are represented using just the digits 0 and 1. This is in contrast to our regular numbering system\n which uses the digits 0-9.\n\n <p>Example:\n\n <table class=data>\n <tr><th>Binary</th><th>Decimal</th></tr>\n <tr><td>00</td><td>0</td></tr>\n <tr><td>01</td><td>1</td></tr>\n <tr><td>10</td><td>2</td></tr>\n <tr><td>11</td><td>3</td></tr>\n </table>\n\n\n To understand binary, consider how the decimal numbering system works. There are ten distinct digits, but we can express arbitrary large\n numbers using the position of digits. In a three-digit number, the first digit from the right is the ones, the second is the tens, the third is the hundreds etc.\n So 273 is 2 x 100 + 7 x 10 + 3 x 1. The positions are factors of 10.\n Decimal is therefore called a <i>base-10</i> numbering system.\n\n<p>Binary numbers are a base-2 numbering system, so just two digits are used: 0 and 1. In binary the positions are factors of two: 1's, 2's, 4's, 8's and so on.\nSo 101 in binary is 5 in decimal (1 x 4 + 0 x 2 + 1 x 1).\nBinary numbers are ideal for digital circuits since the two states in digital systems can be made to correspond to the digits 0 and 1.\n\n[TODO: Link to binary tutorial]\n\n </div>",
+            "spoilers": "<p>Hint: <span class=\"spoiler\">Look at the two output columns separately, and see if you recognize a pattern.</span>"
+        },
+        "FULLADD": {
+            "title": "Full Adder",
+            "splash": "<p>You have now built an adder which can add two bits.\n <p>But to add larger numbers we also need to take a \"carry\" from a previous addition into consideration.\n <p>This mission is to build an adder component that adds the <i>three</i> bits a and b and c, where c is a carry bit.",
+            "specification": "<p>An <b>add</b> component which adds three bits: <b>a</b>, <b>b</b>, and <b>c</b>.\n <p>The output is a two-bit value. The <b>h</b> output is the high bit, the <b>l</b> is the low bit.",
+            "elaboration": "The purpose is to be able to add arbitrarily large numbers. So we add the first pair of digits, then we take the carry (if any) and add the next pair of digits.\n "
+        },
+        "ADD2": {
+            "title": "Multi-bit Adder",
+            "splash": "<p>Now build an adder which adds two 2-bit numbers (and a 1-bit carry).\n <p>2-bit adders can be repeated to make adders work on larger numbers.",
+            "specification": "<p>Build an adder which adds two 2-bit numbers and a 1-bit carry.\n <h3>Input</h3>\n <p><b>a1 a0</b> is a 2-bit number.\n <p><b>b1 b0</b> is a 2-bit number.\n <p><b>c</b> (input carry) is a 1-bit number.\n <h3>Output</h3>\n <p>The sum of the input numbers as the 3-bit number <b>c s1 s0</b> where <b>c</b> is the high bit.\n\n <h3>Example</h3>\n\n <table class='data'>\n <colgroup class=input><col><col></colgroup>\n <colgroup class=input><col><col></colgroup>\n <colgroup class=input><col></colgroup>\n <colgroup class=output><col><col><col></colgroup>\n <colgroup class=output><col></colgroup>\n <tr><th colspan=5>Input</th><th colspan=3>Output</th></tr>\n <tr><th>a1</th><th>a0</th><th>b1</th><th>b0</th><th>c</th><th>c</th><th>s1</th><th>s0</th></tr>\n <tr><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td><td>2+2+1=5</td></tr>\n </table>    ",
+            "debriefing": "<p>The component design for adding two-digit binary numbers can be repeated to add arbitrary large numbers.\n\n <p>Since we are building a 16-bit processor, we repeat this component to build a 16-bit adder component and add it to your toolbox with the name <b>add 16</b>."
+        },
+        "INC": {
+            "title": "Increment",
+            "splash": "<p>You are now ready to start working with 16-bit numbers.\n\n <p>Your mission is to build an <b>increment</b> component that adds 1 to a 16-bit number.\n\n <p>Because you are now working with 16-bit numbers, we have simplified\n the representation on the diagram: Instead of 16 separate wires and connectors,\n they are bundled together and shown as a single connector, indicated by a small \"<b>16</b>\" label.\n\n ",
+            "specification": "<p>Add <b>1</b> to a 16-bit number.<p>\n <p>Ignore the carry if the result is larger than 16 bits",
+            "hints": [
+                {
+                    "html": "16-bits of output as a unit. Displays the output as hexadecimal and as signed decimal."
+                },
+                {
+                    "html": "16 bit input as a unit. You can enter the value as a hexadecimal or decimal."
+                }
+            ],
+            "elaboration": "<p><b>Increment</b> means increasing a number by 1. This is useful in many places, for example in counters.\n\n\n <h3>16-bit</h3>\n\n <p>A processor always operates on multiple bits at a time.\n The processor you are building is a <b>16-bit processor</b> which means it operates on sets of 16 bits at a time.\n\n <p>Modern processors (such as the ones in a computer or smartphone) are typically 32-bit or 64-bit. Embedded processors such as the ones in a microwave oven might be 8-bit or 4-bit.\n We have chosen 16 bits since this is enough to be useful.\n\n <h3>Words and bytes</h3>\n <p>A set of 16 bits is called a <b>word</b>. The size of a word depends on the processor.\n A <b>byte</b> is a machine-independent unit which is always 8 bits.\n\n <div>\n <h3>Bus</h3>\n <p>A set of connections treated as a unit is called a <b>bus</b>. The input and output are each a 16-bit bus.\n The <b>A</b> and <b>B</b> inputs on the 16-bit adder are also each a 16-bit bus.\n </div>\n\n <div>\n <h3>Hexadecimal</h3>\n <p>Larger binary numbers are unwieldy to read and type for humans. Therefore we have <b>hexadecimal</b> numbers which are shorter and easier to manage.\n Hexadecimal is a base-16 numbering system, where the letters A, B, C, D, E, F is used for the numbers ten to fifteen.\n <p>Hexadecimal (abbreviated <i>hex</i>) is convenient for binary data since one hex digit always corresponds to four bits. A 16-bit word is four hex digits. Decimal does digits does not directly correspond to\n binary digits, so decimal is less convenient for binary data.\n\n <p>Examples:\n <table class='data numbers'>\n <tr><th>hex</th><th>unsigned decimal</th><th>binary</th></tr>\n <tr><td>1</td><td>1</td><td>0000000000000001</td></tr>\n <tr><td>F</td><td>15</td><td>0000000000001111</td></tr>\n <tr><td>10</td><td>16</td><td>0000000000010000</td></tr>\n <tr><td>2A</td><td>42</td><td>0000000000101010</td></tr>\n <tr><td>0100</td><td>256</td><td>0000000100000000</td></tr>\n <tr><td>FFFF</td><td>65535</td><td>1111111111111111</td></tr>\n </table>\n\n <p>For your convenience, the 16-bit input and output ports shows the numbers in hexadecimal alongside the binary. You can input hexadecimal numbers,\n and they will be automatically converted to binary.\n\n <p>A <a href=\"https://www.mathsisfun.com/hexadecimals.html\">hexadecimal tutorial</a>. [If you find a better tutorial than this one, please send me link]\n\n </div>",
+            "spoilers": "<p>Hint: A input connector does not need to be connected to anything. An unconnected input is always 0. \n <p>Hint: <span class=spoiler>An <b>inv</b> gate that is not connected to any input will always output 1</p>\n <p>Hint: <span class=spoiler>The input carry <b>c</b> on <b>add</b> is a single bit input and accepts a binary 0 or 1.</p>"
+        },
+        "SUB": {
+            "title": "Subtraction",
+            "splash": "<p>Now build a component which <b>subtract</b>s one 16 bit number from another.",
+            "specification": "<p>Outputs A minus B as a 16-bit number.\n <p>If the result is less than zero it is represented as 65536 plus the result.\n <p>Examples:\n\n <table class='data numbers'>\n <tr><th>result</th><th>16 bit binary</th><th>unsigned decimal</th></tr>\n <tr><td>1</td><td>0000000000000001</td><td>1</td></tr>\n <tr><td>0</td><td>0000000000000000</td><td>0</td></tr>\n <tr><td>-1</td><td>1111111111111111</td><td>65535</td></tr>\n <tr><td>-2</td><td>1111111111111110</td><td>65534</td></tr>\n <tr><td>-3</td><td>1111111111111101</td><td>65533</td></tr>\n </table>\n\n <p>(This is equivalent to two's complement representation)",
+            "elaboration": "<div class=subject>\n\n <h3>Two's Complement</h3>\n <p>Two's complement is the standard way to represent signed (positive and negative) numbers in binary.\n <p>Bit 15 is considered the sign.\n If bit 15 is 0, the number is positive; if 1, the number is negative. Negative numbers have the same value as 65536 minus the number.\n For example -127 corresponds to the unsigned number 65409 because 65536 - 127 = 65409\n\n <p>Some examples:\n <table class='data numbers'>\n <tr><th>Signed decimal</th><th>Unsigned decimal</th><th>16 bit binary</th><th>Hex</th></tr>\n <tr><td>32767</td><td>32767</td><td>0111111111111111</td><td>7FFF</td></tr>\n <tr><td>1</td><td>1</td><td>0000000000000001</td><td>0001</td></tr>\n <tr><td>0</td><td>0</td><td>0000000000000000</td><td>0000</td></tr>\n <tr><td>-1</td><td>65535</td><td>1111111111111111</td><td>FFFF</td></tr>\n <tr><td>-2</td><td>65534</td><td>1111111111111110</td><td>FFFE</td></tr>\n <tr><td>-3</td><td>65533</td><td>1111111111111101</td><td>FFFD</td></tr>\n <tr><td>-32768</td><td>32768</td><td>1000000000000000</td><td>8000</td></tr>\n </table>\n\n <p>\n </div>",
+            "spoilers": "<p>Hint: <span class=spoiler>Investigate how a bitwise inversion (<b>inv16</b>) affects a number</span>\n\n <p>Hint: <span class=spoiler>An inversion of a number equals 65535 minus the number. A negative number is 65536 minus the number.</span>\n\n <p>Hint: <span class=spoiler>A - B = A + INV(B) + 1</span>\n ",
+            "debriefing": "Congratulations, you have built components for the fundamental arithmetics operations.\n <p>Modern processors support much more complex arithmetics such as multiplication, division and floating point numbers,\n but in this game we just keep it simple and create the bare minimum necessary for a working processor."
+        },
+        "ISZERO": {
+            "title": "Equal to Zero",
+            "splash": "<p>Now build a component that indicates if a number is zero. We implement this for a four-bit number first.",
+            "specification": "<p>Should output 1 if and only if all bits in the input are 0.",
+            "debriefing": "This approach can trivially be expanded to 16-bits so we have a component that check if a 16-bit number is zero."
+        },
+        "SIGN": {
+            "title": "Less than Zero",
+            "splash": "<p>Now design a component that indicates if a 16-bit number is negative.",
+            "specification": "<p>Outputs 1 if the input as a 16-bit number is negative\n\n <p>Specification:\n <table class='data'>\n <colgroup class=input><col></colgroup>\n <colgroup class=output><col></colgroup>\n <tr><th>Input</th><th>Output</th></tr>\n <tr><td>input >= 0</td><td>0</td></tr>\n <tr><td>input < 0</td><td>1</td></tr>\n </table>\n\n A number is considered less than zero if bit 15 is 1.\n<h3>Bit numbering</h3>\nBits are numbered from right to left, starting with 0 as the rightmost bit. So bit 15 is the leftmost bit in a 16-bit word.",
+            "elaboration": "For the purpose of this component, we interpret the 16-bit value as a signed integer, and the leftmost bit as the sign.\n\n <p>We have added a <b>splitter</b> to the toolbox. The splitter splits a 16-bit bus into 16 individual connectors.\n Using the splitter you can examine the individual bits of a 16-bit input. The splitter does not have any internal logic.\n\n <div class=subject>\n <h3>Signed and unsigned numbers</h3>\n\n <p>The same 16-bit value can be interpret as either a signed or an unsigned integer. Examples for some numbers around 0:\n\n <table class='data numbers'>\n <tr><th>16 bit binary</th><th>Hex</th><th>Unsigned decimal</th><th>Signed decimal</th></tr>\n <tr><td>0000000000000001</td><td>0001</td><td>1</td><td>1</td></tr>\n <tr><td>0000000000000000</td><td>0000</td><td>0</td><td>0</td></tr>\n <tr><td>1111111111111111</td><td>FFFF</td><td>65535</td><td>-1</td></tr>\n <tr><td>1111111111111110</td><td>FFFE</td><td>65534</td><td>-2</td></tr>\n <tr><td>1111111111111101</td><td>FFFD</td><td>65533</td><td>-3</td></tr>\n </table>\n\n <p>Conveniently, addition and subtraction work exactly the same whether we interpret the numbers as signed or unsigned.\n This means the processor does not really need to know the difference.\n\n [TODO: link to twos-complement tutorial]\n </div>",
+            "spoilers": "<p>Hint: <span class=spoiler>You don't need any of the logical components, just the splitter.</p>"
+        },
+        "MULTIPLEXER": {
+            "title": "Selector",
+            "specification": "<p>A <b>select</b>-component selects one out of two input bits for output.\n\n <p>The <b>s</b> (select) bit indicates which input is selected:\n If 0, <b>d0</b> is selected, if 1, <b>d1</b> is selected.",
+            "elaboration": "<p>This component is also known as a <b>multiplexer</b>."
+        },
+        "DEMUX": {
+            "title": "Switch",
+            "splash": "Next build a <b>switch</b> that channels a data bit through one of two output channels.",
+            "specification": "<p>A <b>switch</b> component channels a data bit through one of two output channels.\n\n <p><b>s</b> (selector) determines if the <b>d</b> (data) bit is dispatched\n through <b>c1</b> or <b>c0</b>."
+        },
+        "LATCH": {
+            "title": "Latch",
+            "splash": "<p>The components built until now have no memory.\n\n <p>Your mission this time is to build a <b>latch</b>, a component that can store one bit.",
+            "specification": "<p>A <b>latch</b> component stores and outputs a single bit\n <p>When <b>st</b> (store) is 1, the value on <b>d</b> is stored and emitted.\n <p>When <b>st</b> is 0, the value of <b>d</b> is ignored, and the previously stored value is still emitted.\n\n <p>To describe this in an input/output table, we introduce a variable, <b>out</b>, which can be assigned a bit value and keep it:</p>\n\n <table class='data'>\n <colgroup class=input><col><col></colgroup>\n <colgroup class=input><col></colgroup>\n <colgroup class=output><col></colgroup>\n <tr><th colspan=2>Input</th><th>Effect</th><th>Output</th></tr>\n <tr><th>st</th><th>d</th><th></th><th></th></tr>\n <tr><td>1</td><td>0</td><td>set <b>out</b> to 0</td><td><b>out</b></td></tr>\n <tr><td>1</td><td>1</td><td>set <b>out</b> to 1</td><td><b>out</b></td></tr>\n <tr><td>0</td><td>1</td><td>-</td><td><b>out</b></td></tr>\n <tr><td>0</td><td>0</td><td>-</td><td><b>out</b></td></tr>\n </table>",
+            "spoilers": "<p>Hint: <span class=\"spoiler\">You will need to use a circular connection - a connection where the output of a component is used as one of the inputs to the same component</span>"
+        },
+        "DFF": {
+            "title": "Data Flip-Flop",
+            "splash": "<p>Using latches you can build a circuit that changes its state over time.\n <p>But a problem appears then: Since state changes are not synchronized across the circuit,\n changes ripple through the circuit in an unpredictable order, leading to racing conditions\n and generally unpredictable results.\n\n <p>The solution is a <b>clock signal</b>, a bit value which\n changes automatically and which is connected to all stateful components.\n\n <p>If components only change output when the clock signal changes, than changes will happen across the circuit at the same time\n and we avoid the synchronization issues.\n\n <p>In this task you will build a <b>flip-flop</b> component which stores a\n bit when the clock signal is 0 but only starts emitting the stored bit when the clock signal changes to 1.",
+            "specification": "<p>A <b>DFF</b> (Data Flip-Flop) component stores and outputs a bit, but only change the output when the clock signal change from 0 to 1.\n\n <p>When <b>st</b> (store) is 1 and <b>cl</b> (clock signal) is 0 the value on <b>d</b> is stored.\n But the previous value is still emitted.\n <p>When the clock signal changes to 1, the flip-flop starts emitting the new value.\n \n <p>When <b>st</b> is 0, the value of <b>d</b> does not have any effect.\n <p>When <b>cl</b> is 1, the value of <b>st</b> and <b>d</b> does not have any effect.\n\n <p>To describe this in a table requires two variables, <b>in</b> and <b>out</b>:\n\n<table class=\"data\">\n <colgroup class=input><col><col><col></colgroup>\n <colgroup class=input><col></colgroup>\n <colgroup class=output><col></colgroup>\n<tr><th colspan=3>Input</th><th>Effect</th><th>Output</th></tr>\n<tr><th>st</th><th>d</th><th>cl</th><th></th><th></th></tr>\n<tr><td>1</td><td>0</td><td>0</td><td>set <b>in</b> to 0</td><td><b>out</b></td></tr>\n<tr><td>1</td><td>1</td><td>0</td><td>set <b>in</b> to 1</td><td><b>out</b></td></tr>\n<tr><td>0</td><td>-</td><td>0</td><td>-</td><td><b>out</b></td></tr>\n<tr><td>-</td><td>-</td><td>1</td><td>set <b>out</b> to <b>in</b></td><td><b>out</b></td></tr>\n</table>",
+            "elaboration": "<p>The clock signal is like a metronome, causing all components to change in unison.\n\n<p>A <b>clock cycle</b> is the span of the clock signal changing from 0 to 1 and then from 1 back to 0. \n\n<p>In a real processor, the clock signal is triggered by some kind of vibrating crystal. In this game, we keep the clock signal as a manual input,\nso you can manually test the circuit.\n\n<p>The <b>clock rate</b> is how fast the clock changes. The higher clock rate, the faster the computer operates.\n\n<p>Note: Despite the name, a \"clock\" does not in itself keep time. It only provide a regular beat.\nBut combined with a counter, a component which keeps track of time can be built.  \n ",
+            "spoilers": "<p>Hint: <span class=\"spoiler\">You need to use two latches.</span>\n <p>Hint: <span class=\"spoiler\">One latch should be written when cl=0, the next latch should be written from the first latch when cl=1.</span>\n "
+        },
+        "DFF2": {
+            "title": "Register",
+            "splash": "<p>You can now store a single bit of data.\n <p>In this mission you have to combine two data flip-flops (DFF's) to store and retrieve <b>two</b> bits of data in one operation.\n <p>(Ultimately we want to store and retrieve 16-bit words at a time, but if you figure out how to store two bits, storing larger sets is trivial.)",
+            "specification": "<p>A <b>2-bit DFF</b> component works like a data flip-flop,\n except two bits (<b>d1</b> and <b>d0</b>) are stored and emitted instead of one.",
+            "elaboration": "The design for a two-bit storage can be trivially repeated.\n We repeat it to get a 16-bit storage unit. We call this component a <b>register</b>.",
+            "debriefing": "The design for a 2-bit storage unit could easily be repeated to generate an 8, 16 or 32 bit unit.\n <p>Since you are building a 16-bit computer, a 16-bit storage unit (called <b>register</b>) have been generated and added to your toolbox."
+        },
+        "COUNTER": {
+            "title": "Counter",
+            "splash": "<p>Next task is to build a counter which increments a number at each clock cycle.\n <p>Counters are a core component in a processor because they drives the execution of instructions.",
+            "specification": "<p>A <b>counter</b> component increments a number each clock cycle.\n\n <p>The counter output changes when <b>cl</b> (clock signal) changes to 1.\n <p>If <b>st</b> is 0, then the previous counter value is incremented with 1.\n <p>If <b>st</b> (store) is 1, then the input value <b>X</b> is used as the new counter value.\n\n<p>To describe this in a table requires two variables, <b>in</b> and <b>out</b>, which stores 16-bit numbers:\n\n<table class=\"data\">\n <colgroup class=input><col><col></colgroup>\n <colgroup class=input><col></colgroup>\n <colgroup class=output><col></colgroup>\n<tr><th colspan=2>Input</th><th>Effect</th><th>Output</th></tr>\n<tr><th>st</th><th>cl</th><th></th><th></th></tr>\n<tr><td>0</td><td>0</td><td class=text>set <b>in</b> to <b>out</b> + 1</td><td><b>out</b></td></tr>\n<tr><td>1</td><td>0</td><td class=text>set <b>in</b> to <b>X</b></td><td><b>out</b></td></tr>\n<tr><td>-</td><td>1</td><td class=text>set <b>out</b> to <b>in</b></td><td><b>out</b></td></tr>\n</table>",
+            "spoilers": "<p>Hint: <span class=spoiler>You need a single register component.</span>"
+        },
+        "RAM": {
+            "title": "RAM",
+            "splash": "<p>You can now store a 16-bit word in a register.\n <p>We can get more memory just by stacking these registers.\n <p>But since a processor operates on a word at a time, we need a way to\n select and change individual words in a larger bank of memory.\n <p>We use memory addresses for this.\n <p>We assign each word in memory a number\n so we can fetch or overwrite a word by using this number.\n\n <p>In this mission you have to use two registers and address them using a single bit.",
+            "specification": "<p>Build a memory unit with two 16-bit registers which is addressable and writable using a one-bit address.\n <h3>Input</h3>\n <p><b>ad</b> (address) indicate which storage unit we are accessing.\n <p><b>st</b> (store) indicate if we want to write to the unit.\n <ul>\n <li>If 1, the value on <b>X</b> is stored in the unit.\n <li>If 0, then <b>X</b> is ignored.\n </ul>\n <p><b>X</b> (data) is a 16-bit value.\n <p><b>cl</b> (clock signal) synchronizes state changes. <b>X</b> is stored when <b>cl</b>=0, but emitted only when <b>cl</b> changes to 1.\n <h3>Output</h3>\n <p>The value currently stored in the unit addressed by <b>ad</b>.",
+            "elaboration": "<p>A memory the size of two words is not much. But if we can get this to work, we can repeat this design recursively to get 4, 8, 16 etc.\n\n <h3>Addressing</h3>\n <p>We number the data words in memory counting from 0. The number of a memory word is called its <b>address</b>.\n When reading or writing a memory cell, we use its address to access it.\n\n <p>Having two cells means we have only two addresses which can be selected by a single bit. Since we have a 16-bit architecture we can support up to 16-bit addresses,\n which in turn means we can address 65,536 data words.\n\n <p>This kind of memory is called RAM (Random Access Memory) because we can access any cell and update its value as long as we know its address.\n\n <div class=subject>\n <h3>Bytes and KB</h3>\n <p>Usually memory capacity (RAM and other storage) is measured in <b>bytes</b>, where a byte is 8 bits.\n Because we have a 16-bit architecture we store and retrieve 16-bit words at a time, each word is 2 bytes.\n We can have 65536 memory cells (since 65535 is the highest number that can be expressed in 16 bits), so measured\n in bytes we have twice the number, 131,072 bytes. This is usually written as 128KB (KB = kilo bytes).\n\n <p>How does 131,072 become 128K? This is due to the wonderful fact that when measuring bytes, K does not mean 1000\n (as with any other measurement) but 1024. And 128*1024 = 131,072.\n\n </div>",
+            "debriefing": "<p>This design for a 2-bit addressable RAM can be repeated recursively to build larger RAM units."
+        },
+        "ALU_PRESET": {
+            "title": "Unary ALU",
+            "splash": "<p>The components built until now have all performed a single specific operation.\n <p>An ALU (Arithmetic Logic Unit) is a core component that can perform\n a set of different logic and arithmetic operations such as addition, subtraction and inversion.\n <p>A set of control bits determine what operation to perform.\n <p>The ALU is implemented in two steps.\n The first step is a \"unary ALU\" that inverts an input or replaces it with zero.\n ",
+            "specification": "<p>A <b>Unary ALU</b> modifies a single input <b>X</b>. Two flags select which operations to apply.\n\n<p>If <b>z</b> (zero) is 1, then 0 is output instead of the input\n<p>If <b>n</b> (negate) is 1, then the input is inverted\n<p>The order is significant, so if both are 1, the output will be the inversion of 0.\n\n<p>Specification:\n <table class='data'>\n <colgroup class=input><col><col></colgroup>\n <colgroup class=output><col></colgroup>\n <tr><th colspan=2>Input</th><th>Output</th></tr>\n <tr><th>z</th><th>n</th><th></th><th></th></tr>\n <tr><td>0</td><td>0</td><td>X unmodified</td></tr>\n <tr><td>1</td><td>0</td><td>0</td></tr>\n <tr><td>0</td><td>1</td><td>Invert X</td></tr>\n <tr><td>1</td><td>1</td><td>Invert 0</td></tr>\n </table>",
+            "elaboration": "<h3>Design of the Arithmetic Logical Unit (ALU)</h3>\n\n<p>The ALU is a component that can perform various different arithmetic and logical operations. \nThere are two inputs, X and Y, and a set of options (flags) that selects what operation to perform on the inputs. \n\n<p>Some of the operations it can perform are addition (X+Y), subtraction (X-Y or Y-X), logical and (X and Y), logical or (X or Y). It can also perform operations on a single input (and ignore the other); for example, increment (X+1), decrement (X-1), invert X and negate X (0-X).\n\n<p>It might look like we need a very complex component to support all these operations. But it turns out we can achieve them by combining only two operations with two possible modifications of each input and output.\n\n<p>For example, we saw in the \"subtraction\" level that subtraction can be implemented in terms of addition if we can invert one input and output.\nAnd we saw in the \"increment\" level that incrementing (adding 1 to X) can be implemented by replacing Y with 0 and then inverting and subtracting.\n<p>Just by inverting and/or zeroing any of the two inputs and perhaps the output, we can implement a whole bunch of arithmetic operations.\n\n<p>So we implement the ALU in two stages. First we build the unary component which can invert and/or zero-out an input. (\"unary\" mean it operates on a single number)\nAnd in the next stage we combine the input/output modifiers with the binary operations to complete the ALU."
+        },
+        "ALU": {
+            "title": "ALU",
+            "splash": "<p>We can now build the ALU itself.\n <p>There are two 16-bit input values and six individual options that direct which operations are performed on the input.\n ",
+            "specification": "<p>The ALU (Arithmetic/Logic Unit) performs one or more operations on two input values\n <b>X</b> and <b>Y</b>.\n\n <p>The six flags selects what operations to perform.\n Each flag trigger an operation when the flag is 1:\n\n <ul>\n <li><b>zx</b>: Use 0 for X</li>\n <li><b>nx</b>: Invert X</li>\n <li><b>zy</b>: Use 0 for Y</li>\n <li><b>ny</b>: Invert Y</li>\n <li><b>f</b> selects an operation:\n <p>0: output is X AND Y\n <br>1: output is X + Y\n </li>\n <li><b>no</b>: Invert output</li>\n </ul>\n\n <p>The flags can be combined and the specified order is significant.\n <p>For example if both <b>zx</b> and <b>nx</b> is 1,\n then X is inverted 0.",
+            "elaboration": "<p>By combining the six flags, you can perform a wide range of arithmetic operations.\n <p>Some examples:\n <table class='data numbers'>\n <tr><th>zx</th><th>nx</th><th>zy</th><th>ny</th><th>f</th><th>no</th><th>result</th></tr>\n <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>X + Y</td></tr>\n <tr><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td><td>X - 1</td></tr>\n <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>X and Y</td></tr>\n <tr><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>X - Y</td></tr>\n <tr><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>\n <tr><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>\n </table>\n\n <p>It is probably not immediately obvious why a certain combination of flags causes a certain result, but you can try them out yourself to see how it works.\n\n\n <p>(The ALU design is based on the <a href=\"https://www.nand2tetris.org/\">Nand to Tetris course</a> and is used here by permission.)"
+        },
+        "OPCODES1": {
+            "title": "Opcodes",
+            "specification": "<p>Select the combination of bit-flags for the ALU which correspond to the opcode expression.</p><p>Most of the expressions should be self-explanatory.</p><p><b>~</b> is bitwise inversion: Invert all bits in the input</p><p><b>&</b> is bitwise <b>and</b><p><b>|</b> is bitwise <b>or</b><p>Note: Some of the lines may have multiple valid solutions."
+        },
+        "CONDITION": {
+            "title": "Condition",
+            "specification": "<p>The three flags indicate three possible conditions for the number <b>X</b>:\n\n <table class='data text'>\n <tr><th>Flag</th><th>Condition</th>\n <tr><td><b>lt</b></td><td>Less than zero</td>\n <tr><td><b>eq</b></td><td>Equal to zero</td>\n <tr><td><b>gt</b></td><td>Greater than zero</td>\n </table>\n\n <p>If the flag for the true condition is 1, then the output is 1.\n\n\n <p>The flags can be combined so:\n\n <table class='data'>\n <tr><th colspan=3>Flags</th> <th>Output 1 when</th></tr>\n <tr><th>lt</th><th>eq</th><th>gt</th><th></th></tr>\n <tr><td>0</td><td>0</td><td>0</td> <td>Never</td></tr>\n <tr><td>0</td><td>0</td><td>1</td> <td>X &gt; 0</td></tr>\n <tr><td>0</td><td>1</td><td>0</td> <td>X = 0</td></tr>\n <tr><td>0</td><td>1</td><td>1</td> <td>X ≥ 0</td></tr>\n <tr><td>1</td><td>0</td><td>0</td> <td>X &lt; 0</td></tr>\n <tr><td>1</td><td>0</td><td>1</td> <td>X ≠ 0</td></tr>\n <tr><td>1</td><td>1</td><td>0</td> <td>X ≤ 0</td></tr>\n <tr><td>1</td><td>1</td><td>1</td> <td>Always</td></tr>\n </table>",
+            "spoilers": "<p>Hint: <span class=spoiler>Only one of the three conditions can be true at a time.</span>\n <p>Hint: <span class=spoiler>There are already components available to determine the first two conditions.</span>\n <p>Hint: <span class=spoiler>\"X ≤ 0\" means that X is either less than 0 <i>or</i> equal to zero.</span>\n <p>Hint: <span class=spoiler>Output is 1 if <b>lt</b>=1 and X&lt;0 or <b>eq</b>=1 and X=0 or <b>gt</b>=1 and X&gt;0.</span>\n "
+        },
+        "CPU_STATE": {
+            "title": "Combined Memory",
+            "splash": "A processor uses both kinds of memory, registers and RAM.\n <p>Registers are directly accessible by the processor and used for intermediate values and calculations.\n RAM can store large amount of data, but we can read or write from only a single address at a time.\n <p>In this processor we have two registers called <b>A</b> and <b>D</b> and one RAM bank.\n <p>In this mission, combine the two registers with the RAM bank.\n ",
+            "specification": "<p>The memory of the processor consist of two 16-bit registers called A and D, and a RAM unit.\n\n<p>The <b>a</b>, <b>d</b>, <b>*a</b> flags and the <b>X</b> input is used to update one or more of the registers.\n\n<table class='data text'>\n <tr><th>Flag</th><th></th></tr>\n <tr><td>a</td><td>Write X to the A register</td></tr>\n <tr><td>d</td><td>Write X to the D register</td></tr>\n <tr><td>*a</td><td>Write X to RAM at the address given by the A register</td></tr>\n </table>\n\n<p>The flags can be combined, so <b>X</b> is simultaneously written to multiple registers. If all three flags are 0, the X input is ignored.\n\n<p><b>cl</b> is the clock signal.\n\n <table class='data text'>\n <tr><th>Output</th><th></th></tr>\n <tr><td>A</td><td>The current value of the A register</td></tr>\n <tr><td>D</td><td>The current value of the D register</td></tr>\n <tr><td>*A</td><td>The current value in RAM at the address given by A the register</td></tr>\n </table>",
+            "elaboration": "<p>Our processor have two levels of memory: registers and RAM.\n <p>RAM has by far the largest capacity, but since we need addresses to read from ram, and because\n we need to store intermediate values, we have two registers for these purposes: A (for address) and D (for data).\n\n <p>A real-world processor might have a dozen registers or more, but in our processor we use only two since this\n is about the minimum you can get away with.\n\n <h3>Flags</h3>\n <p>A <i>flag</i> is a term for an input-bit that selects a single option. If there are multiple flags they can be turned on or off independently.\n For example in this component the flags <b>a</b>, <b>d</b>, and <b>*a</b> can be set in any combination, including all three or none."
+        },
+        "INSTRUCTON_DECODER": {
+            "title": "Instruction Decoder",
+            "specification": "<p>Bit 15 of the input indicates the kind of instruction:</p>\n\n <table class='data'>\n <tr><th>bit 15</th><th>Instruction kind</th></tr>\n <tr><td>0</td><td>data</td></tr>\n <tr><td>1</td><td>computation</td></tr>\n </table>\n\n <p>For a <b>data</b> instruction, <b>W</b> (data word) should reflect the input, the <b>a</b> flag should be 1 and all other flags should be 0.\n\n <p>For a <b>computation</b> instruction, the <b>ci</b> (computation instruction) flag should be 1, <b>W</b> should be 0. All other flags should be mapped from \n the bits in the input as follows:</p>\n\n <table class='data'>\n <tr><th>Input</th><th colspan=2>Output</th><th></th></tr>\n <tr><th>Bit</th><th>Group</th><th>flag</th></tr>\n\n <tr><td>14</td><td>(ignored)</th><td>-</td></tr>\n <tr><td>13</td><td>(ignored)</th><td>-</td></tr>\n\n <tr><td>12</td><td>source</th><td>sm</td></tr>\n\n <tr><td>11</td><td>computation</th><td>zx</td></tr>\n <tr><td>10</td><td>computation</th><td>nx</td></tr>\n <tr><td>9</td><td>computation</th><td>zy</td></tr>\n <tr><td>8</td><td>computation</th><td>ny</td></tr>\n <tr><td>7</td><td>computation</th><td>f</td></tr>\n <tr><td>6</td><td>computation</th><td>no</td></tr>\n\n <tr><td>5</td><td>destination</th><td>a</td></tr>\n <tr><td>4</td><td>destination</th><td>d</td></tr>\n <tr><td>3</td><td>destination</th><td>*a</td></tr>\n\n <tr><td>2</td><td>condition</th><td>gt</td></tr>\n <tr><td>1</td><td>condition</th><td>eq</td></tr>\n <tr><td>0</td><td>condition</th><td>lt</td></tr>\n\n </table>",
+            "elaboration": "<h3>Instruction</h3>\n<p>A processor works by processing a sequence of instructions - a program - one instruction at a time.\nEach instruction is a 16-bit code which direct the processor to perform some operation. The instruction indicates:\n<ul><li>An arithmetic operation to perform by the ALU – for example addition, increment or inversion.\n <li>Where to take the input (registers or RAM)\n <li>Where to put the result (registers or RAM)\n <li>If the processor should jump to different location in the program. This is specified as a condition – if the condition is fulfilled by the result of the operation, we signal a jump.\n</ul>\n<p>Additionally, we have data instruction which load a value from the program into memory.\nIf bit 15 is 0, then the instruction is a number which is loaded into the A register.\n\n\n<h3>Assembler language</h3>\n\n<p>It quickly becomes tedious to write machine instructions in binary.\nTherefore programmers use <i>assembly language</i> (abbreviated <i>asm</i>), which represent instructions\nin a human-readable form (or at least more human-readable as raw binary).\nFor example the binary instruction <code>1110011111010000</code> is <code>D+1→D</code> in assembler,\nwhich means calculate D+1 and store the result in D.\n\n<p>Some example machine instructions:\n\n<table class=data>\n<tr><th>Asm</th><th>Binary</th><th>Hex</th><th>Effect</th></tr>\n<tr><td class=code>D+1→D</td><td class=code>1110011111010000</td><td class=code>e7d0</td><td class=text>Increment D register</td></tr>\n<tr><td class=code>A→D</td><td class=code>1110110000010000</td><td class=code>ec10</td><td class=text>Copies the value from the A register into the D register</td></tr>\n<tr><td class=code>42→A</td><td class=code>0000000000101010</td><td class=code>002a</td><td class=text>Sets the A register to the value 42.</td></tr>\n<tr><td class=code>D;JEQ</td><td class=code>1110001100000010</td><td class=code>e302</td><td class=text>Jumps if D is 0</td></tr>\n</table>\n\n <p>(The instruction set design is based on the <a href=\"https://www.nand2tetris.org/\">Nand to Tetris course</a> and is used here by permission.)",
+            "spoilers": "<p>Hint: <span class=spoiler>You may use two splitters.</span>\n "
+        },
+        "EXECUTION_ENGINE": {
+            "title": "Control Unit",
+            "splash": "The <b>control unit</b> is what actually executes the instruction.\n It takes the decoded instruction and directs the ALU and memory\n to perform the specified operation.",
+            "specification": "<h3>Input</h3>\n <p><b>I</b> is an instruction that should be decoded and executed\n <p><b>cl</b> is the clock signal.\n <h3>Operation</h3>\n <p>Should execute the ALU operation given by the <b>op</b> flags.\n <ul>\n <li>The X input to the ALU is the D register.\n <li>The Y input depends on the <b>sm</b> (source memory) flag:\n <table class=data>\n <tr><th>sm</th><th>Y</th><tr>\n <tr><td>0</td><td class=text>A register</td><tr>\n <tr><td>1</td><td class=text>*A (RAM)</td><tr>\n </table>\n </li>\n </ul>\n <h3>Store</h3>\n <p>Should store a value in memory.\n Which value depends on the <b>ci</b> (computation instruction) flag:\n <table class=data>\n <tr><th>ci</th><th>Value to store</th><tr>\n <tr><td>0</td><td class=text>The W (data word) from the instruction</td><tr>\n <tr><td>1</td><td class=text>The output of the ALU operation</td><tr>\n </table>\n <p>The value is stored in the memory units specified by the <b>dst</b> (destination) flags.\n \n <h3>Output</h3>\n <p><b>j</b> indicates if the ALU output fulfills the condition flags specified by the <b>cd</b> flags.\n <p><b>A</b> is the current value of the <b>A</b> register.",
+            "elaboration": "The control unit receives an instruction, decodes it, directs what ALU operations to perform\n and directs the data flow to and from the ALU and memory.\n\n<p>Some example machine instructions:\n\n<table class=data>\n<tr><th>Asm</th><th>Binary</th><th>Hex</th><th>Effect</th></tr>\n<tr><td class=code>D+1→D</td><td class=code>1110011111010000</td><td class=code>e7d0</td><td class=text>Increment D register</td></tr>\n<tr><td class=code>A→D</td><td class=code>1110110000010000</td><td class=code>ec10</td><td class=text>Copies the value from the A register into the D register</td></tr>\n<tr><td class=code>42→A</td><td class=code>0000000000101010</td><td class=code>002a</td><td class=text>Sets the A register to the value 42</td></tr>\n<tr><td class=code>D;JEQ</td><td class=code>1110001100000010</td><td class=code>e302</td><td class=text>Jumps if D is 0</td></tr>\n</table>\n\n<p>You can use the above instructions to test the control unit."
+        },
+        "PROGRAM_ENGINE": {
+            "title": "Program Engine",
+            "specification": "<p>The program engine consist of a ROM module holding the program, and a counter (called program counter or PC) that holds the address of the current instruction.\n\n <h3>Input</h3>\n <p>If <b>j</b> (jump) is 1, the counter is set to the number in <b>Ad</b> (address). \n <br>If <b>j</b> is 0, <b>Ad</b> is ignored.\n\n <p><b>cl</b> is the clock signal.\n\n <h3>Output</h3>\n The instruction at the ROM address given by the counter",
+            "elaboration": "<h3>Rom</h3>\n <p>ROM (Read-Only Memory) is a memory unit which can be addressed like RAM-memory, but where the data can only be read and not changed.\n Basically the data has to be pre-programmed from the factory.\n Simple computers often have the program on ROM, while more advanced systems have the programs(s) on storage like a hard-disk and load them into RAM-memory before execution.\n In this game use a ROM-program since we can then avoid all the complexity of how to load the program into memory.\n <p>The ROM component provided here contains a very simple program which just generates the Fibonacci number sequence in RAM – that is the numbers 1,1,2,3,5,8,13 etc.\n This is just to be able to test that the processor works.\n <h3>Program counter</h3>\n<p>The counter is called the <b>program counter</b> or <b>PC</b> because it counts through the instructions in the program one at the time.\nThe counter value is the address of the instruction to execute.\nChanging the counter (through the <b>j</b> and <b>A</b> inputs) cause <b>jumps</b> in the program."
+        },
+        "CPU": {
+            "title": "Computer",
+            "splash": "You have reached the final challenge. If you can complete this, you have built a working programmable microprocessor.",
+            "specification": "<p>Combine the program engine with the control unit.</p>\n <p>The control unit should executed the instructions\n passed from the program engine. If the instruction result in a jump,\n the program counter should be updated to the new address.\n <p><b>cl</b> is the clock signal</p>"
+        },
+        "IO": {
+            "title": "Input and Output",
+            "splash": "<p>To be of any use, a computer needs to be able to communicate with the outside world.\n <p>This happens through hardware devices such as screen, keyboard, touch sensors, network interface and so on.\n\n <p>In this level we integrate with the hardware of a simple robot - motors and sensors.</p>",
+            "specification": "<p>Integrate with the <b>robot</b> hardware, so it can be\n written and read like a memory address.\n\n <p>Input signals should be be sent to the hardware when\n <b>st</b> (store) is 1 and <b>cl</b> (clock signal) is 1.\n\n <p>Output signals should be readable immediately</b>\n\n <p>Mapping of input bits in <b>X</b> to device control signals:\n <table class=data>\n <tr><th>bit</th><th>Control signal</th></tr>\n <tr><td>15</td><td>lo</td></tr>\n <tr><td>14</td><td>lf</td></tr>\n <tr><td>13</td><td>mv</td></tr>\n <tr><td>12</td><td>stp</td></tr>\n <tr><td>11</td><td>tl</td></tr>\n <tr><td>10</td><td>tr</td></tr>\n <tr><td>09</td><td>zp</td></tr>\n </table>\n\n <p>Mapping of device sensors to output bits:\n <table class=data>\n <tr><th>bit</th><th>Sensor output</th></tr>\n <tr><td>3</td><td>mv</td></tr>\n <tr><td>2</td><td>tn</td></tr>\n <tr><td>1</td><td>ob</td></tr>\n <tr><td>0</td><td>lf</td></tr>\n </table>",
+            "elaboration": "<p><b>Memory-mapped</b> input/output means that connections to external devices\n are plugged into the memory address space along side the regular RAM units.\n\n <p>This means the processor can write to output devices and read from input\n devices exactly the same way it is reads and writes to memory.\n\n <p>"
+        }
+    },
+    "components": {
+        "NAND": {
+            "name": "nand",
+            "help": "<b>Nand</b> gate. Outputs 0 if and only if both inputs are 1.\n <table class='truth'>\n <tr><th colspan=2>Input</th><th>Output</th></tr>\n <tr><th>a</th><th>b</th><th></th></tr>\n <tr><td>0</td><td>0</td><td>1</td></tr>\n <tr><td>1</td><td>0</td><td>1</td></tr>\n <tr><td>0</td><td>1</td><td>1</td></tr>\n <tr><td>1</td><td>1</td><td>0</td></tr>\n </table>\n "
+        },
+        "INV": {
+            "name": "inv",
+            "help": "<b>inv</b> gate. Inverts the input.\n <table class='truth'>\n <tr><th>Input</th><th>Output</th></tr>\n <tr><td>0</td><td>1</td></tr>\n <tr><td>1</td><td>0</td></tr>\n </table>"
+        },
+        "AND": {
+            "name": "and",
+            "help": "<b>and</b> gate. Outputs 1 if both inputs are 1.\n <table class='truth'>\n <tr><th colspan=2>Input</th><th>Output</th></tr>\n <tr><th>a</th><th>b</th><th></th></tr>\n <tr><td>0</td><td>0</td><td>0</td></tr>\n <tr><td>1</td><td>0</td><td>0</td></tr>\n <tr><td>0</td><td>1</td><td>0</td></tr>\n <tr><td>1</td><td>1</td><td>1</td></tr>\n </table>"
+        },
+        "OR": {
+            "name": "or",
+            "help": "<b>or</b> gate. Outputs 1 if at least one input is 1\n <table class='truth'>\n <tr><th colspan=2>Input</th><th>Output</th></tr>\n <tr><th>a</th><th>b</th><th></th></tr>\n <tr><td>0</td><td>0</td><td>0</td></tr>\n <tr><td>1</td><td>0</td><td>1</td></tr>\n <tr><td>0</td><td>1</td><td>1</td></tr>\n <tr><td>1</td><td>1</td><td>1</td></tr>\n </table>"
+        },
+        "XOR": {
+            "name": "xor",
+            "help": "<b>xor</b> gate. Output 1 when the two inputs are different.\n <table class='truth'>\n <tr><th colspan=2>Input</th><th>Output</th></tr>\n <tr><th>a</th><th>b</th><th></th></tr>\n <tr><td>0</td><td>0</td><td>0</td></tr>\n <tr><td>1</td><td>0</td><td>1</td></tr>\n <tr><td>0</td><td>1</td><td>1</td></tr>\n <tr><td>1</td><td>1</td><td>0</td></tr>\n </table>"
+        },
+        "INV16": {
+            "name": "inv 16",
+            "help": "16 bit <b>inv</b> gate. Inverts each bit.\n <table class='truth'>\n <tr><th>Input</th><th>Output</th></tr>\n <tr><td>0</td><td>1</td></tr>\n <tr><td>1</td><td>0</td></tr>\n </table>"
+        },
+        "AND16": {
+            "name": "and 16",
+            "help": "16 bit <b>and</b> gate. Performs pairwise <b>and</b> for all bits in a pair of 16-bit values.\n <table class='truth'>\n <tr><th colspan=2>Input</th><th>Output</th></tr>\n <tr><th>A</th><th>B</th><th></th></tr>\n <tr><td>0</td><td>0</td><td>0</td></tr>\n <tr><td>1</td><td>0</td><td>0</td></tr>\n <tr><td>0</td><td>1</td><td>0</td></tr>\n <tr><td>1</td><td>1</td><td>1</td></tr>\n </table>"
+        },
+        "HALFADD": {
+            "name": "add",
+            "help": "Half-adder. Adds two one-bit numbers.\n\n <table class='truth'>\n <tr><th colspan=2>Input</th><th colspan=2>Output</th></tr>\n <tr><th>a</th><th>b</th><th>h</th><th>l</th></tr>\n <tr><td>0</td><td>0</td><td>0</td><td>0</td></tr>\n <tr><td>1</td><td>0</td><td>0</td><td>1</td></tr>\n <tr><td>0</td><td>1</td><td>0</td><td>1</td></tr>\n <tr><td>1</td><td>1</td><td>1</td><td>0</td></tr>\n </table>"
+        },
+        "ADDC": {
+            "name": "add",
+            "help": "Full adder. Adds three one-bit numbers together.\n <table class='truth'>\n <tr><th colspan=3>Input</th><th colspan=2>Output</th></tr>\n <tr><th>a</th><th>b</th><th>c</th><th>h</th><th>l</th></tr>\n <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>\n <tr><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td></tr>\n <tr><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>\n <tr><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td></tr>\n <tr><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>\n <tr><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td></tr>\n <tr><td>1</td><td>1</td><td>0</td><td>1</td><td>0</td></tr>\n <tr><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>\n </table>\n"
+        },
+        "ADD16": {
+            "name": "add 16",
+            "help": "<b>16-bit Addition</b> Adds two 16-bit numbers together.\n Overflow is ignored, so the results \"roll over\" to 0 if it exceeds 65536.\n"
+        },
+        "ADDC16": {
+            "name": "add 16",
+            "help": "<b>16-bit Addition</b> Adds two 16-bit numbers and a 1-bit carry.\n <b>S</b> is the 16-bit sum. Output <b>c</b> is the carry if the sum is larger than 16 bits.\n "
+        },
+        "INC16": {
+            "name": "inc 16",
+            "help": "<b>Increment</b>\n <p>Add <b>1</b> to a 16-bit value.<p>\n "
+        },
+        "SUB16": {
+            "name": "sub 16",
+            "help": "<b>16-bit subtraction</b> Subtracts a 16-bit number from another.\n <p>Negative results are represented using two's complement."
+        },
+        "ZERO": {
+            "name": "0",
+            "help": "Constant <b>0</b>."
+        },
+        "ZERO16": {
+            "name": "0",
+            "help": "Constant <b>0</b>."
+        },
+        "ISZERO": {
+            "name": "is zero",
+            "help": "Output 1 if the 16-bit input number is 0"
+        },
+        "ISNEG": {
+            "name": "is neg",
+            "help": "Output 1 if the 16-bit input number is negative.\n <p>Negative numbers are represented in two's complement, which means they have bit 15 to be 1.\n"
+        },
+        "SPLIT16": {
+            "name": "splitter",
+            "help": "Splits a 16-bit bus into 16 individual connections."
+        },
+        "BUNDLE16": {
+            "name": "bundler",
+            "help": "Collects 16 individual connections into a 16-bit bus."
+        },
+        "SELECT": {
+            "name": "select",
+            "help": "A <b>select</b> component selects one of two input bits for output.\n <table class='truth'>\n <tr><th>Input</th><th>Output</th></tr>\n <tr><th>s</th><th></th></tr>\n <tr><td>0</td><td>d0</td></tr>\n <tr><td>1</td><td>d1</td></tr>\n </table>"
+        },
+        "DECODER": {
+            "name": "decoder",
+            "help": "A <b>decoder</b> Sets one of the output channels to 1 based on a control bit.\n <table class='truth'>\n <tr><th>Input</th><th colspan=2>Output</th></tr>\n <tr><th></th><th>c1</th><th>c0</th></tr>\n <tr><td>0</td><td>0</td><td>1</td></tr>\n <tr><td>1</td><td>1</td><td>0</td></tr>\n </table>"
+        },
+        "SELECT16": {
+            "name": "select 16",
+            "help": "<b>selector</b>. Selects one of two 16-bit input channels based on an address bit.\n <table class='truth'>\n <tr><th>Input</th><th>Output</th></tr>\n <tr><th>s</th><th></th></tr>\n <tr><td>0</td><td>D0</td></tr>\n <tr><td>1</td><td>D1</td></tr>\n </table>"
+        },
+        "DEMUX": {
+            "name": "switch",
+            "help": "A <b>switch</b> channels a data bit through one of two output channels.\n <table class='truth'>\n <tr><th colspan=2>Input</th><th colspan=2>Output</th></tr>\n <tr><th>s</th><th>d</th><th>c1</th><th>c0</th></tr>\n <tr><td>0</td><td>0</td><td>0</td><td>0</td></tr>\n <tr><td>0</td><td>1</td><td>0</td><td>1</td></tr>\n <tr><td>1</td><td>0</td><td>0</td><td>0</td></tr>\n <tr><td>1</td><td>1</td><td>1</td><td>0</td></tr>\n </table>"
+        },
+        "ALU_PRESET": {
+            "name": "unary alu",
+            "help": "A <b>Unary ALU</b> modifies the input value <b>X</b> based on flags:\n\n If <b>z</b> (zero) is 1 then 0 is used instead of the input\n If <b>n</b> (negate) is 1 then the input is inverted\n\n <table class='truth'>\n <tr><th colspan=2>Input</th><th>Output</th></tr>\n <tr><th>z</th><th>n</th><th></th></tr>\n <tr><td>0</td><td>0</td><td>X</td></tr>\n <tr><td>1</td><td>0</td><td>0</td></tr>\n <tr><td>0</td><td>1</td><td>Invert X</td></tr>\n <tr><td>1</td><td>1</td><td>Invert 0</td></tr>\n </table>\n"
+        },
+        "ALU": {
+            "name": "alu",
+            "help": "Arithmetic Logic Unit. Performs an arithmetic or logical operation on the two inputs <b>X</b> and <b>Y</b>.\n The 6-bit <b>op</b> (operation-code) flags select which operation.\n "
+        },
+        "CONDITION": {
+            "name": "condition",
+            "help": "Output 1 if input <b>X</b> fulfills the conditions specified by the <b>cd</b>-flags."
+        },
+        "LATCH": {
+            "name": "latch",
+            "help": "<b>Latch</b> Stores and emits a bit.\n <p>When <b>st</b> (store) is 1, the <b>d</b> bit is stored and emitted.\n <p>When <b>st</b> is 0, the last stored bit is emitted, and the current value of <b>d</b> is ignored.\n "
+        },
+        "DFF": {
+            "name": "dff",
+            "help": "<b>Data flip-flop</b> Stores and emits a bit, synchronized by a clock signal.\n\n <table class='truth'>\n <tr><th colspan=3>Input</th><th>Side effect</th><th>Output</th></tr>\n <tr><th>st</th><th>d</th><th>cl</th><th></th><th></th></tr>\n <tr><td>0</td><td>-</td><td>0</td><td>-</td><td><b>out</b></td></tr>\n <tr><td>1</td><td>0</td><td>0</td><td>set <b>in</b> to 0</td><td><b>out</b></td></tr>\n <tr><td>1</td><td>1</td><td>0</td><td>set <b>in</b> to 1</td><td><b>out</b></td></tr>\n <tr><td>-</td><td>-</td><td>1</td><td>set <b>out</b> to <b>in</b></td><td><b>out</b></td></tr>\n </table>\n <p>In the table <b>in</b> and <b>out</b> are stored bits. When <b>cl</b> is 0, <b>in</b> can be changed.\n When <b>cl</b> changes to 1, <b>out</b> is set to the value of <b>in</b>.\n "
+        },
+        "DFF16": {
+            "name": "register",
+            "help": "<b>16-bit DFF register.</b> Stores and emits a 16-bit word, synchronized by a clock signal.\n\n <table class='truth'>\n <tr><th colspan=3>Input</th><th>Side effect</th><th>Output</th></tr>\n <tr><th>st</th><th>X</th><th>cl</th><th></th><th></th></tr>\n <tr><td>0</td><td>-</td><td>0</td><td>-</td><td><b>out</b></td></tr>\n <tr><td>1</td><td>-</td><td>0</td><td>set <b>in</b> to X</td><td><b>out</b></td></tr>\n <tr><td>-</td><td>-</td><td>1</td><td>set <b>out</b> to <b>in</b></td><td><b>out</b></td></tr>\n </table>\n "
+        },
+        "RAM2": {
+            "name": "ram2",
+            "help": "<b>RAM 2</b> Stores two 16-bit values.\n <p><b>ad</b>: two-bit address to read (and to write if <b>st</b> is 1)\n <p><b>X</b>: data to store (if <b>st</b> is 1)\n <p><b>st</b>: if 1, store <b>D</b> at the address <b>ad</b>\n <p><b>cl</b>: clock signal.\n <p>Output is the 16-bit value stored at the address given by <b>ad</b>\n "
+        },
+        "COUNTER": {
+            "name": "counter",
+            "help": "<b>16-bit counter.</b> Stores and emits a 16-bit word.\n <p>The counter changes when <b>cl</b> (clock signal) changes to 1.\n\n <table class='truth'>\n <tr><th>st</th><th></th></tr>\n <tr><td>0</td><td>counter is set to current number + 1.</td></tr>\n <tr><td>1</td><td>counter is set to <b>X</b></td></tr>\n </table>\n\n "
+        },
+        "RAM": {
+            "name": "ram",
+            "help": "<b>RAM</b> Stores 64K 16-bit values.\n <p><b>Ad</b>: address to read (and to write if <b>st</b> is 1)\n <p><b>X</b>: data to store (if <b>st</b> is 1)\n <p><b>st</b>: if 1, store <b>D</b> at the address <b>Ad</b>\n <p><b>cl</b>: clock signal.\n <p>Output is the 16-bit value stored at the address given by Ad\n "
+        },
+        "STATE": {
+            "name": "memory",
+            "help": "The combined CPU memory.\n <p>Consists of two registers <b>A</b> and <b>D</b>, and a RAM memory unit.\n <p>The <b>*A</b> output is the RAM cell at the address given by <b>A</b>\n "
+        },
+        "ROM": {
+            "name": "rom",
+            "help": "<b>Read-only memory</b> Stores up to 64K 16-bit words. Can be read but not modified.\n <p><b>Ad</b>: address to read\n <p>Output is the 16-bit value stored at the address given by A\n <p>This ROM unit stores a machine code program which generate the Fibonacci sequence.\n "
+        },
+        "INSTRUCTION_DECODER": {
+            "name": "instruction",
+            "help": "Splits the significant bits of a machine code instruction into groups."
+        },
+        "EXECUTION_ENGINE": {
+            "name": "control",
+            "help": "Executes an instruction given by <b>I</b> which can update the internal state.\n <b>cl</b> is the clock signal. The <b>j</b> flag indicates if the instruction result in a program jump. "
+        },
+        "PROGRAM_ENGINE": {
+            "name": "program",
+            "help": "Reads instructions sequentially from the ROM memory unit.\n For each clock cycle it advances to the next instruction.\n The <b>j</b> flag causes the program to jump to a specific ROM address given by <b>A</b>\n and continue from there.\n "
+        },
+        "ROBOT": {
+            "name": "robot",
+            "help": "<b>Robot controller</b> Integrate with the hardware machinery and sensors of a robot.\n\n <p>Each input initiates an action when set to 1.\n <p><b>lo</b>: Turn lamp on\n <br><b>lf</b>: Turn lamp off\n <br><b>mv</b>: Start moving forward\n <br><b>stp</b>: Stop moving forward\n <br><b>tl</b>: Initiate a 90 degree left turn\n <br><b>tr</b>: Initiate a 90 degree right turn\n <br><b>zp</b>: Fire death ray</p>\n <p>Move/turn signals are ignored if the robot is already moving or turning<p>\n <p>Outputs:</p>\n <p><b>mv</b> is 1 if the robot is currently moving forward\n <br><b>tn</b> is 1 if the robot is currently turning\n <br><b>ob</b> is 1 if an obstacle is detected\n <br><b>lf</b> is 1 if life is detected<p>"
+        }
+    }
+}

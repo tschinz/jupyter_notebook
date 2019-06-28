@@ -1,0 +1,28 @@
+{
+    "missions": {
+        "INV": {
+            "title": "Invert",
+            "splash": "<p>Welcome to <b>The Nand Game</b>!</p>",
+            "specification": "<p>The first task is to build an inverter (<b>inv</b>) component.\n\n </p>",
+            "hints": [
+                {
+                    "html": "<b>Step 1:</b> Drag components from the toolbox to the blue area."
+                },
+                {
+                    "html": "<b>Step 2:</b> Tap arrow to select, then tap a source connector on a component to create a connection."
+                },
+                {
+                    "html": "<b>Step 3:</b> Tap arrow to select, then tap a source connector on a component to create a connection."
+                }
+            ],
+            "elaboration": "<h3>Introduction</h3>",
+            "debriefing": "The <b>inv</b>-component have now been added to your toolbox and can be used as a building block in the next levels."
+        }
+    },
+    "components": {
+        "NAND": {
+            "name": "nand",
+            "help": "<b>Nand</b> gate. Outputs 0 if and only if both inputs are 1.\n"
+        }
+    }
+}

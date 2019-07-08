@@ -2,11 +2,14 @@
 .ipynb_checkpoints/
 output/
 
-# Ingnore dome Constellium data files
+# Ingnore Constellium data files
 04_HEVS/ASI/basicdataanalysis/PressAgingOven/input/
 04_HEVS/ASI/basicdataanalysis/ProcessMiningOven/input/
 04_HEVS/ASI/basicdataanalysis/Rapstab-7075-21mm-T651/input/
 04_HEVS/USP/input/
+
+# Ignore Apple Health Data Files
+01_Mine/apple_health/in/
 
 # Created by https://www.gitignore.io/api/python,pycharm
 # Edit at https://www.gitignore.io/?templates=python,pycharm

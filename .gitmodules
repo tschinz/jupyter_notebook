@@ -1,0 +1,4 @@
+[submodule "04_HEVS/Dashboard/hevslib"]
+	path = 04_HEVS/Dashboard/hevslib
+	url = https://gitlab.hevs.ch/SPL/miscellaneous/python-hevslib
+	branch = master

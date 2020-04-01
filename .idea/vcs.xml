@@ -3,6 +3,7 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/04_HEVS/ASI/basicdataanalysis" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/04_HEVS/Dashboard/hevslib" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/05_Other/DataScience/Data_science_for_biologists_2019" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/05_Other/MachineLearning/scikit-learn-videos" vcs="Git" />
   </component>

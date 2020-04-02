@@ -40,19 +40,17 @@ from hevslib.general import *
 from hevslib.pandas import *
 from hevslib.plotly import *
 from hevslib.time import *
+from hevslib.md import *
 
 ###############################################################################
 # Custom Dashboard Plot figures
 ###############################################################################
-def project_plot_combined(df, df_col, projectList, projectListColumns, projectConf, outputGraphDir, ext_file):
+def projectPlotCombined(df, df_col, projectDf, projectCol, projectConf, outputGraphDir, ext_file):
   fig = go.Figure()
   fig = make_subplots(specs=[[{"secondary_y": True}]])
-  title = datetime.date.today().strftime("%Y.%m.%d") + " " + projectConf[0] + " " + \
-          filterRows(projectList, [projectListColumns["project_number"], [projectConf[0]]])[
-            projectListColumns["acronym"]].iloc[0] + " - Project Overview"
-  title_long = datetime.date.today().strftime("%d.%m.%Y") + " - " + projectConf[0] + " - " + \
-               filterRows(projectList, [projectListColumns["project_number"], [projectConf[0]]])[
-                 projectListColumns["title_humanreadable"]].iloc[0] + " - Project Overview"
+  title = projectConf[0] + " " + filterRows(projectDf, [projectCol["project_number"], [projectConf[0]]])[
+            projectCol["acronym"]].iloc[0] + " Project Overview"
+  title_graph = "Project Overview"
   # Add member data
   for member in df[df_col["collaborator"]].unique():
     labels = df.loc[df[df_col["collaborator"]] == member][df_col["date"]]
@@ -64,15 +62,15 @@ def project_plot_combined(df, df_col, projectList, projectListColumns, projectCo
   labels = df[df_col["date"]]
   values = df[df_col['total_budget']]
   fig.add_trace(go.Scatter(x=labels, y=values, name=df_col['total_budget']), secondary_y=True)
-  values = df[df_col['monthy_budget']]
-  fig.add_trace(go.Scatter(x=labels, y=values, name=df_col['monthy_budget']), secondary_y=True)
+  values = df[df_col['monthly_budget']]
+  fig.add_trace(go.Scatter(x=labels, y=values, name=df_col['monthly_budget']), secondary_y=True)
   values = df[df_col['remaining_budget']]
   fig.add_trace(go.Scatter(x=labels, y=values, name=df_col['remaining_budget']), secondary_y=True)
 
   # Update Graph
   fig.update_layout(barmode='stack',
                     xaxis={'categoryorder': 'total descending', 'type': 'date'},
-                    title={'text': title_long, 'x': 0.5, 'y': 0.9},
+                    title={'text': title_graph, 'x': 0.5, 'y': 0.9},
                     xaxis_title=df_col["date"],
                     yaxis_title=df_col["hours"],
                     )
@@ -80,44 +78,39 @@ def project_plot_combined(df, df_col, projectList, projectListColumns, projectCo
   fig.update_yaxes(title_text='CHF', secondary_y=True)
   graphFilename = (title + ext_file).replace(" ", "_")
   plot_figure(outputGraphDir + graphFilename, fig)
-
+  return outputGraphDir + graphFilename
   
-def project_plot_budget(df, df_col, projectList, projectListColumns, projectConf, outputGraphDir, ext_file):
+def projectBarBudget(df, df_col, projectDf, projectCol, projectConf, outputGraphDir, ext_file):
   fig = go.Figure()
-  title = projectConf[0] + " " + filterRows(projectList, [projectListColumns["project_number"], [projectConf[0]]])[
-            projectListColumns["acronym"]].iloc[0] + " Project Budget"
-  title_long = datetime.date.today().strftime("%d.%m.%Y") + " - " + projectConf[0] + " - " + \
-               filterRows(projectList, [projectListColumns["project_number"], [projectConf[0]]])[
-                 projectListColumns["title_humanreadable"]].iloc[0] + " - Project Budget"
+  title = projectConf[0] + " " + filterRows(projectDf, [projectCol["project_number"], [projectConf[0]]])[
+            projectCol["acronym"]].iloc[0] + " Project Budget"
+  title_graph = "Project Budget"
 
   labels = df[df_col["date"]]
   values = df[df_col['total_budget']]
   fig.add_trace(go.Scatter(x=labels, y=values, name=df_col['total_budget']))
-  values = df[df_col['monthy_budget']]
-  fig.add_trace(go.Scatter(x=labels, y=values, name=df_col['monthy_budget']))
+  values = df[df_col['monthly_budget']]
+  fig.add_trace(go.Scatter(x=labels, y=values, name=df_col['monthly_budget']))
   values = df[df_col['remaining_budget']]
   fig.add_trace(go.Scatter(x=labels, y=values, name=df_col['remaining_budget']))
 
   # Update Graph
   fig.update_layout(barmode='stack',
                     xaxis={'categoryorder': 'total descending', 'type': 'date'},
-                    title={'text': title_long, 'x': 0.5, 'y': 0.9},
+                    title={'text': title_graph, 'x': 0.5, 'y': 0.9},
                     xaxis_title=df_col["date"],
                     yaxis_title=df_col["hours"],
                     )
   fig.update_yaxes(title_text='CHF')
   graphFilename = (title + ext_file).replace(" ", "_")
   plot_figure(outputGraphDir + graphFilename, fig)
-
+  return outputGraphDir + graphFilename
   
-def project_plot_hours(df, df_col, projectList, projectListColumns, projectConf, outputGraphDir, ext_file):
+def projectLinesHours(df, df_col, projectDf, projectCol, projectConf, outputGraphDir, ext_file):
   fig = go.Figure()
-  title = datetime.date.today().strftime("%Y.%m.%d") + " " + projectConf[0] + " " + \
-          filterRows(projectList, [projectListColumns["project_number"], [projectConf[0]]])[
-            projectListColumns["acronym"]].iloc[0] + " - Project Hours"
-  title_long = datetime.date.today().strftime("%d.%m.%Y") + " - " + projectConf[0] + " - " + \
-               filterRows(projectList, [projectListColumns["project_number"], [projectConf[0]]])[
-                 projectListColumns["title_humanreadable"]].iloc[0] + " - Project Hours"
+  title = projectConf[0] + " " + filterRows(projectDf, [projectCol["project_number"], [projectConf[0]]])[
+            projectCol["acronym"]].iloc[0] + " Project Hours"
+  title_graph = "Project Hours"
   # Add member data
   for member in df[df_col["collaborator"]].unique():
     labels = df.loc[df[df_col["collaborator"]] == member][df_col["date"]]
@@ -127,52 +120,132 @@ def project_plot_hours(df, df_col, projectList, projectListColumns, projectConf,
   # Update Graph
   fig.update_layout(barmode='stack',
                     xaxis={'categoryorder': 'total descending', 'type': 'date'},
-                    title={'text': title_long, 'x': 0.5, 'y': 0.9},
+                    title={'text': title_graph, 'x': 0.5, 'y': 0.9},
                     xaxis_title=df_col["date"],
                     yaxis_title=df_col["hours"],
                     )
   fig.update_yaxes(title_text=df_col["hours"])
   graphFilename = (title + ext_file).replace(" ", "_")
   plot_figure(outputGraphDir + graphFilename, fig)
+  return outputGraphDir + graphFilename
 
+def projectPieCollaborators(df1, df2, df_col, projectDf, projectCol, projectConf, outputGraphDir, ext_file):
+  title = "Budget by Collaborator"
+  labels = df2[df_col['collaborator']]
+  values = df2[df_col['amount']]
+  trace1 = go.Pie(title=title,
+                  labels=labels,
+                  values=values,
+                  hoverinfo='label+percent+value',
+                  domain=dict(x=[0,0.5]))
+    
+  title = "Hours by Collaborator"
+  labels = df2[df_col['collaborator']]
+  values = df2[df_col['hours']]
+  trace2 = go.Pie(title=title,
+                  labels=labels,
+                  values=values,
+                  hoverinfo='label+percent+value',
+                  domain=dict(x=[0.5,1.0]))
   
+  title = "Activity by Collaborator"
+  labels = df1[df_col['collaborator']]
+  values = df1[df_col['activity']]
+  trace3 = go.Pie(title=title,
+                  labels=labels,
+                  values=values,
+                  hoverinfo='label+percent+value',
+                  domain=dict(x=[0.5,1.0]))
   
-  # Add to report
-  #print_file("![{}]({})".format(title, "." + os.sep + graph_subdir + graphFilename), reportFilePath, True, False)
-  #print_file("", reportFilePath, True, False)
+  title = "Split by Collaborator"  
+  layout = go.Layout(title={'text': title, 'x': 0.5, 'y': 0.9},
+                     #annotations=[ann1,ann2],
+                     # Hide legend if you want
+                     #showlegend=False
+                     )
+  data = [trace1, trace2, trace3]
+  # Create fig with data and layout
+  fig = go.Figure(data=data,layout=layout)
+    
+  graphFilename = (title + ext_file).replace(" ", "_")
+  plot_figure(outputGraphDir + graphFilename, fig)
+  return outputGraphDir + graphFilename
+
+def projectPieBudget(df1, df2, df_col, projectDf, projectCol, projectConf, outputGraphDir, ext_file):
+  title = "Budget by Collaborator"
+  labels = df[df_col['collaborator']]
+  values = df[df_col['amount']]
+  trace1 = go.Pie(title=title,
+                  labels=labels,
+                  values=values,
+                  hoverinfo='label+percent+value',
+                  domain=dict(x=[0,0.5]))
+    
+  title = "Hours by Collaborator"
+  labels = df[df_col['collaborator']]
+  values = df[df_col['hours']]
+  trace2 = go.Pie(title=title,
+                  labels=labels,
+                  values=values,
+                  hoverinfo='label+percent+value',
+                  domain=dict(x=[0.5,1.0]))
+  title = projectConf[0] + " - " + filterRows(projectDf, [projectCol["project_number"], [projectConf[0]]])[projectCol["acronym"]].iloc[0] + " - Split by Collaborator"  
+  layout = go.Layout(title={'text': title, 'x': 0.5, 'y': 0.9},
+                     #annotations=[ann1,ann2],
+                     # Hide legend if you want
+                     #showlegend=False
+                     )
+  data = [trace1, trace2]
+  # Create fig with data and layout
+  fig = go.Figure(data=data,layout=layout)
+    
+  graphFilename = (title + ext_file).replace(" ", "_")
+  plot_figure(outputGraphDir + graphFilename, fig)
+  return outputGraphDir + graphFilename
 
 
 ###############################################################################
 # Reports
 ###############################################################################
-def projectReport(df, addMonth):
-  # Filter by month
-  (monthlyTimeEntiresDf, monthlystartdate, monthlyenddate) = filterByMonth(df, addMonth)
-  # Define output file
-  monthlyreportFile = "Month_{}_Report".format(monthlystartdate.strftime('%Y-%m'))
-  monthlyreportFilePath = graphFilename = outputDir + md_subdir + monthlyreportFile + ".md"
-  print_file("# {}".format(monthlyreportFile.replace("_", " ")), monthlyreportFilePath, True, False, False)
-  print_file("", monthlyreportFilePath, True, False)
+def projectReport(df1, df2, df3, ash_col, projectDf, projectCol, projectConf, outputMdDir, outputPdfDir, verbose):
+  # create graph subdir
+  img_subdir = "img" + os.sep
+  outputImgDir = outputMdDir + img_subdir
+  createDir(os.path.realpath(outputImgDir))
+  
+  mdContent = ""
+  # Title
+  mdContent += mdH1("Project Report - {} - {}".format(projectConf[0], filterRows(projectDf, [projectCol["project_number"], [projectConf[0]]])[projectCol["title_humanreadable"]].iloc[0]))
+  # Basic Stats
+  basicStats = []
+  basicStats.append("Report Data exported: {}".format(filterRows(projectDf, [projectCol["project_number"], [projectConf[0]]])[projectCol["updated"]].iloc[0]))
+  basicStats.append("Project begin: {}".format(filterRows(projectDf, [projectCol["project_number"], [projectConf[0]]])[projectCol["date_begin"]].iloc[0]))#.dt.strftime('%d.%m.%Y')))
+  basicStats.append("Project end: {}".format(filterRows(projectDf, [projectCol["project_number"], [projectConf[0]]])[projectCol["date_end"]].iloc[0]))#.strftime('%d.%m.%Y')))
+  basicStats.append("HEI Project Budget: {:d} CHF".format(int(df3[ash_col['total_budget']].iloc[0])))
+  basicStats.append("HEI Budget Remaining: {:d} CHF".format(int(df3[ash_col['remaining_budget']].iloc[-1])))
+  basicStats.append("HEI Montlhy Budget: {:d} CHF".format(int(df3[ash_col['monthly_budget']].iloc[0])))
+  basicStats.append("HEI Month Remaining: ~{:.2f} Months".format(df3[ash_col['remaining_budget']].iloc[0]/df3[ash_col['monthly_budget']].iloc[0]))
+  mdContent += mdList(basicStats) + mdlinesep()
+  
+  # Pie charts
+  imagePath = projectPieCollaborators(df1, df2, ash_col, projectDf, projectCol, projectConf, outputImgDir, ext_file)
+  mdContent += mdImage("." + os.sep + img_subdir + os.path.basename(imagePath), "Project Pie Cllaborators") + mdlinesep()
+    
+  # Bar charts
+  imagePath = projectPlotCombined(df3, ash_col, projectDf, projectCol, projectConf, outputImgDir, ext_file)
+  mdContent += mdImage("." + os.sep + img_subdir + os.path.basename(imagePath), "Project Plot Combined") + mdlinesep()
+  imagePath = projectBarBudget(df3, ash_col, projectDf, projectCol, projectConf, outputImgDir, ext_file)
+  mdContent += mdImage("." + os.sep + img_subdir + os.path.basename(imagePath), "Project Plot Budget") + mdlinesep()
+  imagePath = projectLinesHours(df3, ash_col, projectDf, projectCol, projectConf, outputImgDir, ext_file)  
+  mdContent += mdImage("." + os.sep + img_subdir + os.path.basename(imagePath), "Project Plot Hours") + mdlinesep()
 
-  # Parameter Unique Values
-  parameterUniqueValues(monthlyTimeEntiresDf, monthlyreportFilePath, verbose)
-  # Summary of Working Hours
-  clientDfs, uniqueEntries = getUniqueClientDfs(monthlyTimeEntiresDf)
+  mdContent += mdlinesep() + mdlinesep() + mdItalics("Report automatically generated - (c) zas")
+  
+  filePath = (outputMdDir + projectConf[0] + "_" + filterRows(projectDf, [projectCol["project_number"], [projectConf[0]]])[projectCol["title_humanreadable"]].iloc[0]).replace(" ", "_")
+  mdFilePath = (filePath + ".md")
+  
+  print_file(mdContent, mdFilePath, fileoutput=True, consoleoutput=False,  append=False)
+  generate_report(mdFilePath, outputPdfDir, verbose)
 
-  print_file("## Monthly Working Hours per Clients and Project", monthlyreportFilePath, True, True)
-  print_file("Timeframe: {} => {}".format(monthlystartdate.strftime('%d-%m-%Y'), monthlyenddate.strftime('%d-%m-%Y')),
-             monthlyreportFilePath, False, True)
-  for i in range(len(clientDfs)):
-    print_file("### Client {}".format(uniqueEntries[i]), monthlyreportFilePath, True, True)
-    clientDfs[i]['duration_hours'] = (clientDfs[i]['duration'].dt.total_seconds() / 3600)
-    print_file(panda_groupby_md(str(clientDfs[i].groupby('project')['duration_hours'].sum())), monthlyreportFilePath,
-               True, True)
-    print_file("", monthlyreportFilePath, True, True)
-
-  # Create Visualizations
-  # Working Hours Pie Chart
-  workingHoursPieChart(monthlyTimeEntiresDf, monthlyreportFilePath, monthlystartdate, timeFrame="Month")
-  # Working Hours Bar Chart
-  workingHoursBarChart(clientDfs, monthlyreportFilePath, uniqueEntries, monthlystartdate, timeFrame="Month")
-
-  return monthlyreportFilePath
+  if verbose >=1:
+     print("Report created: " + filePath + ".pdf")

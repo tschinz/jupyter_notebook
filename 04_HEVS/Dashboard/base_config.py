@@ -21,7 +21,7 @@ from hevslib.plotly import *
 # 0 = no output
 # 1 = normal output
 # 2 = verbose output
-verbose = 2
+verbose = 1
 
 
 
@@ -36,6 +36,7 @@ projectCol = {"project_number": "project_number",
               "title_humanreadable": "title_humanreadable",
               "budget_total": "budget_total",
               "budget_material": "budget_material",
+              "budget_extern": "budget_extern",
               "date_begin": "date_begin",
               "date_end": "date_end",
               "updated": "updated",

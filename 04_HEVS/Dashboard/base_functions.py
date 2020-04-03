@@ -42,10 +42,11 @@ from hevslib.plotly import *
 from hevslib.time import *
 from hevslib.md import *
 
+
 ###############################################################################
 # Custom Dashboard Plot figures
 ###############################################################################
-def projectPlotCombined(df, df_col, projectDf, projectCol, projectConf, outputGraphDir, ext_file):
+def projectPlotCombined(df, df_col, projectDf, projectCol, projectConf, outputGraphDir, plotlySettings):
   fig = go.Figure()
   fig = make_subplots(specs=[[{"secondary_y": True}]])
   title = projectConf[0] + " " + filterRows(projectDf, [projectCol["project_number"], [projectConf[0]]])[
@@ -55,8 +56,8 @@ def projectPlotCombined(df, df_col, projectDf, projectCol, projectConf, outputGr
   for member in df[df_col["collaborator"]].unique():
     labels = df.loc[df[df_col["collaborator"]] == member][df_col["date"]]
     values = df.loc[df[df_col["collaborator"]] == member][df_col["hours"]]
-    fig.add_trace(go.Bar(x=labels, y=values, name=member, texttemplate="%{label}", textposition="inside"),
-                  secondary_y=False)
+    fig.add_trace(go.Bar(x=labels, y=values, name=member), secondary_y=False)#, texttemplate="%{label}", textposition="outside"),
+                  
 
   # Add global data
   labels = df[df_col["date"]]
@@ -76,11 +77,12 @@ def projectPlotCombined(df, df_col, projectDf, projectCol, projectConf, outputGr
                     )
   fig.update_yaxes(title_text=df_col["hours"], secondary_y=False)
   fig.update_yaxes(title_text='CHF', secondary_y=True)
-  graphFilename = (title + ext_file).replace(" ", "_")
-  plot_figure(outputGraphDir + graphFilename, fig)
+  graphFilename = (title + plotlySettings[0]).replace(" ", "_")
+  plot_figure(outputGraphDir + graphFilename, fig, plotlySettings[1], plotlySettings[2], plotlySettings[3], plotlySettings[4])
+  
   return outputGraphDir + graphFilename
   
-def projectBarBudget(df, df_col, projectDf, projectCol, projectConf, outputGraphDir, ext_file):
+def projectBarBudget(df, df_col, projectDf, projectCol, projectConf, outputGraphDir, plotlySettings):
   fig = go.Figure()
   title = projectConf[0] + " " + filterRows(projectDf, [projectCol["project_number"], [projectConf[0]]])[
             projectCol["acronym"]].iloc[0] + " Project Budget"
@@ -102,8 +104,8 @@ def projectBarBudget(df, df_col, projectDf, projectCol, projectConf, outputGraph
                     yaxis_title=df_col["hours"],
                     )
   fig.update_yaxes(title_text='CHF')
-  graphFilename = (title + ext_file).replace(" ", "_")
-  plot_figure(outputGraphDir + graphFilename, fig)
+  graphFilename = (title + plotlySettings[0]).replace(" ", "_")
+  plot_figure(outputGraphDir + graphFilename, fig, plotlySettings[1], plotlySettings[2], plotlySettings[3], plotlySettings[4])
   return outputGraphDir + graphFilename
   
 def projectLinesHours(df, df_col, projectDf, projectCol, projectConf, outputGraphDir, ext_file):
@@ -115,7 +117,7 @@ def projectLinesHours(df, df_col, projectDf, projectCol, projectConf, outputGrap
   for member in df[df_col["collaborator"]].unique():
     labels = df.loc[df[df_col["collaborator"]] == member][df_col["date"]]
     values = df.loc[df[df_col["collaborator"]] == member][df_col["hours"]]
-    fig.add_trace(go.Bar(x=labels, y=values, name=member, texttemplate="%{label}", textposition="inside"))
+    fig.add_trace(go.Bar(x=labels, y=values, name=member))#, texttemplate="%{label}", textposition="outside"))
 
   # Update Graph
   fig.update_layout(barmode='stack',
@@ -125,19 +127,21 @@ def projectLinesHours(df, df_col, projectDf, projectCol, projectConf, outputGrap
                     yaxis_title=df_col["hours"],
                     )
   fig.update_yaxes(title_text=df_col["hours"])
-  graphFilename = (title + ext_file).replace(" ", "_")
-  plot_figure(outputGraphDir + graphFilename, fig)
+  graphFilename = (title + plotlySettings[0]).replace(" ", "_")
+  plot_figure(outputGraphDir + graphFilename, fig, plotlySettings[1], plotlySettings[2], plotlySettings[3], plotlySettings[4])
   return outputGraphDir + graphFilename
 
-def projectPieCollaborators(df1, df2, df_col, projectDf, projectCol, projectConf, outputGraphDir, ext_file):
+def projectPieCollaborators(df1, df2, df_col, projectDf, projectCol, projectConf, outputGraphDir, plotlySettings):
   title = "Budget by Collaborator"
   labels = df2[df_col['collaborator']]
   values = df2[df_col['amount']]
   trace1 = go.Pie(title=title,
                   labels=labels,
                   values=values,
+                  
+                  textinfo='label+percent+value',
                   hoverinfo='label+percent+value',
-                  domain=dict(x=[0,0.5]))
+                  domain=dict(x=[0.0,0.5]))
     
   title = "Hours by Collaborator"
   labels = df2[df_col['collaborator']]
@@ -145,15 +149,7 @@ def projectPieCollaborators(df1, df2, df_col, projectDf, projectCol, projectConf
   trace2 = go.Pie(title=title,
                   labels=labels,
                   values=values,
-                  hoverinfo='label+percent+value',
-                  domain=dict(x=[0.5,1.0]))
-  
-  title = "Activity by Collaborator"
-  labels = df1[df_col['collaborator']]
-  values = df1[df_col['activity']]
-  trace3 = go.Pie(title=title,
-                  labels=labels,
-                  values=values,
+                  textinfo='label+percent+value',
                   hoverinfo='label+percent+value',
                   domain=dict(x=[0.5,1.0]))
   
@@ -163,51 +159,100 @@ def projectPieCollaborators(df1, df2, df_col, projectDf, projectCol, projectConf
                      # Hide legend if you want
                      #showlegend=False
                      )
-  data = [trace1, trace2, trace3]
+  data = [trace1, trace2]
   # Create fig with data and layout
   fig = go.Figure(data=data,layout=layout)
     
-  graphFilename = (title + ext_file).replace(" ", "_")
-  plot_figure(outputGraphDir + graphFilename, fig)
+  graphFilename = (title + plotlySettings[0]).replace(" ", "_")
+  plot_figure(outputGraphDir + graphFilename, fig, plotlySettings[1], plotlySettings[2], plotlySettings[3], plotlySettings[4])
   return outputGraphDir + graphFilename
 
-def projectPieBudget(df1, df2, df_col, projectDf, projectCol, projectConf, outputGraphDir, ext_file):
-  title = "Budget by Collaborator"
-  labels = df[df_col['collaborator']]
-  values = df[df_col['amount']]
+
+def projectPieBudgetActivity(df1, df3, df_col, projectDf, projectCol, projectConf, outputGraphDir, plotlySettings):
+  title = "Budget"
+  labels = ['HEI', 'Material', 'Extern', 'Remaining']
+  budget_total = filterRows(projectDf, [projectCol["project_number"], [projectConf[0]]])[projectCol["budget_total"]].iloc[0]
+  budget_material = filterRows(projectDf, [projectCol["project_number"], [projectConf[0]]])[projectCol["budget_material"]].iloc[0]
+  budget_extern = filterRows(projectDf, [projectCol["project_number"], [projectConf[0]]])[projectCol["budget_extern"]].iloc[0]
+  budget_remaining = df3[df_col['remaining_budget']].iloc[-1]
+  budget_hei = budget_total - budget_material- budget_extern - budget_remaining
+  budget = [budget_hei, budget_material, budget_extern, budget_remaining]
+  values = budget
   trace1 = go.Pie(title=title,
                   labels=labels,
                   values=values,
+                  textinfo='label+percent+value',
                   hoverinfo='label+percent+value',
-                  domain=dict(x=[0,0.5]))
-    
-  title = "Hours by Collaborator"
-  labels = df[df_col['collaborator']]
-  values = df[df_col['hours']]
+                  domain=dict(x=[0.0,0.4]))
+  
+  title = "Activity by Collaborator"
+  uniqueEntries = df1[df_col['activity']].unique()
+  uniqueEntryOccurence = uniqueEntries.shape[0]
+  nbrOfOccurences = []
+  for uniqueEntry in np.sort(uniqueEntries):
+    nbrOfOccurences.append(df1.loc[df1[df_col['activity']] == uniqueEntry].shape[0])
+  labels = np.sort(uniqueEntries)
+  values = nbrOfOccurences
   trace2 = go.Pie(title=title,
                   labels=labels,
                   values=values,
+                  textinfo='label+percent',
                   hoverinfo='label+percent+value',
-                  domain=dict(x=[0.5,1.0]))
-  title = projectConf[0] + " - " + filterRows(projectDf, [projectCol["project_number"], [projectConf[0]]])[projectCol["acronym"]].iloc[0] + " - Split by Collaborator"  
+                  domain=dict(x=[0.6,1.0]))
+  
+  title = projectConf[0] + " - " + filterRows(projectDf, [projectCol["project_number"], [projectConf[0]]])[projectCol["acronym"]].iloc[0] + " Project Statistics"
   layout = go.Layout(title={'text': title, 'x': 0.5, 'y': 0.9},
                      #annotations=[ann1,ann2],
                      # Hide legend if you want
-                     #showlegend=False
+                     showlegend=False
                      )
   data = [trace1, trace2]
   # Create fig with data and layout
   fig = go.Figure(data=data,layout=layout)
     
-  graphFilename = (title + ext_file).replace(" ", "_")
-  plot_figure(outputGraphDir + graphFilename, fig)
+  graphFilename = (title + plotlySettings[0]).replace(" ", "_")
+  plot_figure(outputGraphDir + graphFilename, fig, plotlySettings[1], plotlySettings[2], plotlySettings[3], plotlySettings[4])
+  return outputGraphDir + graphFilename
+
+def projectPieCollaborators(df2, df_col, projectDf, projectCol, projectConf, outputGraphDir, plotlySettings):
+  title = "Budget by Collaborator"
+  labels = df2[df_col['collaborator']]
+  values = df2[df_col['amount']]
+  trace1 = go.Pie(title=title,
+                  labels=labels,
+                  values=values,
+                  textinfo='label+percent+value',
+                  hoverinfo='label+percent+value',
+                  domain=dict(x=[0,0.4]))
+    
+  title = "Hours by Collaborator"
+  labels = df2[df_col['collaborator']]
+  values = df2[df_col['hours']]
+  trace2 = go.Pie(title=title,
+                  labels=labels,
+                  values=values,
+                  textinfo='label+percent+value',
+                  hoverinfo='label+percent+value',
+                  domain=dict(x=[0.6,1.0]))
+  title = projectConf[0] + " - " + filterRows(projectDf, [projectCol["project_number"], [projectConf[0]]])[projectCol["acronym"]].iloc[0] + " Split by Collaborator"  
+  layout = go.Layout(title={'text': title, 'x': 0.5, 'y': 0.9},
+                     #annotations=[ann1,ann2],
+                     # Hide legend if you want
+                     showlegend=False
+                     )
+  data = [trace1, trace2]
+  # Create fig with data and layout
+  fig = go.Figure(data=data,layout=layout)
+    
+  graphFilename = (title + plotlySettings[0]).replace(" ", "_")
+  plot_figure(outputGraphDir + graphFilename, fig, plotlySettings[1], plotlySettings[2], plotlySettings[3], plotlySettings[4])
   return outputGraphDir + graphFilename
 
 
 ###############################################################################
 # Reports
 ###############################################################################
-def projectReport(df1, df2, df3, ash_col, projectDf, projectCol, projectConf, outputMdDir, outputPdfDir, verbose):
+def projectReport(df1, df2, df3, ash_col, projectDf, projectCol, projectConf, outputMdDir, outputPdfDir, plotlySettings, verbose):
   # create graph subdir
   img_subdir = "img" + os.sep
   outputImgDir = outputMdDir + img_subdir
@@ -228,15 +273,18 @@ def projectReport(df1, df2, df3, ash_col, projectDf, projectCol, projectConf, ou
   mdContent += mdList(basicStats) + mdlinesep()
   
   # Pie charts
-  imagePath = projectPieCollaborators(df1, df2, ash_col, projectDf, projectCol, projectConf, outputImgDir, ext_file)
-  mdContent += mdImage("." + os.sep + img_subdir + os.path.basename(imagePath), "Project Pie Cllaborators") + mdlinesep()
+  
+  imagePath = projectPieBudgetActivity(df1, df3, ash_col, projectDf, projectCol, projectConf, outputImgDir, plotlySettings)
+  mdContent += mdImage("." + os.sep + img_subdir + os.path.basename(imagePath), "Project Pie Budget") + mdlinesep()
+  imagePath = projectPieCollaborators(df2, ash_col, projectDf, projectCol, projectConf, outputImgDir, plotlySettings)
+  mdContent += mdImage("." + os.sep + img_subdir + os.path.basename(imagePath), "Project Pie Collaborators") + mdlinesep()
     
   # Bar charts
-  imagePath = projectPlotCombined(df3, ash_col, projectDf, projectCol, projectConf, outputImgDir, ext_file)
+  imagePath = projectPlotCombined(df3, ash_col, projectDf, projectCol, projectConf, outputImgDir, plotlySettings)
   mdContent += mdImage("." + os.sep + img_subdir + os.path.basename(imagePath), "Project Plot Combined") + mdlinesep()
-  imagePath = projectBarBudget(df3, ash_col, projectDf, projectCol, projectConf, outputImgDir, ext_file)
+  imagePath = projectBarBudget(df3, ash_col, projectDf, projectCol, projectConf, outputImgDir, plotlySettings)
   mdContent += mdImage("." + os.sep + img_subdir + os.path.basename(imagePath), "Project Plot Budget") + mdlinesep()
-  imagePath = projectLinesHours(df3, ash_col, projectDf, projectCol, projectConf, outputImgDir, ext_file)  
+  imagePath = projectLinesHours(df3, ash_col, projectDf, projectCol, projectConf, outputImgDir, plotlySettings)  
   mdContent += mdImage("." + os.sep + img_subdir + os.path.basename(imagePath), "Project Plot Hours") + mdlinesep()
 
   mdContent += mdlinesep() + mdlinesep() + mdItalics("Report automatically generated - (c) zas")

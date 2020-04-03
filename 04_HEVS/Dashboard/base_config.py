@@ -23,8 +23,6 @@ from hevslib.plotly import *
 # 2 = verbose output
 verbose = 1
 
-
-
 # Data Storage constants
 data_inputDir = "in"
 data_outputDir = "out"
@@ -44,14 +42,17 @@ projectCol = {"project_number": "project_number",
 
 # activity constans
 activityData = []
-activityCol = ["german", "french"]
-activityData = [["Allgemeine administrative Arbeiten", "Tâches administratives générales"],
-                ["Durchführung von aF&E Projekten oder -Arbeiten", "Réalisation de projects ou d'activités Ra&D"],
-                ["Durchführung von Mandaten", "Réalisation de mandats"],
-                ["Projektakquisition", "Acquisition de projects"],
-                ["Unterricht (Anstellungsplan)", "Cours dispensé (plan d'engagement)"],
-                ["Unterrichtsspezifische Aufgaben (1.4)", "Tâche spécifiques d'enseignement"],
-                ["Weiterbildung", "Formation"],
+activityCol = ["german", "french", 'english']
+activityData = [["Allgemeine administrative Arbeiten", "Tâches administratives générales", "Admin"],
+                ["Durchführung von aF&E Projekten oder -Arbeiten", "Réalisation de projets ou d'activités Ra&D", "R&D"],
+                ["Durchführung von Mandaten", "Réalisation de mandats", "Mandates"],
+                ["Projektakquisition", "Acquisition de projets", "Projektakquisition"],
+                ["Unterricht (Anstellungsplan)", "Cours dispensé (plan d'engagement)", "HEI Course"],
+                ["Unterrichtsspezifische Aufgaben (1.4)", "Tâche spécifiques d'enseignement", "Prepare Course"],
+                ["Weiterbildung", "Formation", "Further Education"],
+                ["Individuelle berufliche Weiterbildung", "Formation", "Further Education"],
+                ["Arbeitssitzung", "Séance de travail", "Meeting"],
+                ["Dienstreise", "Déplacement", "Voyage"]
                 ]
 activityDf = pd.DataFrame(activityData, columns=activityCol)
 
@@ -80,11 +81,14 @@ ashCols = {'german': {"date": "Datum",
 ###############################################################################
 # Graph output Options
 #
+#notebookGraphicInteraction = GraphInteractionOption('interactive')
 notebookGraphicInteraction = GraphInteractionOption('static')
 notebookGraphicOutputs = GraphOutputOption('both')
 
 ext_file = ".svg"
 
-staticImageSize = {'width': 1280, 'height': 720, 'scale': 1}
+staticImageSize = {'width': 1000, 'height': 500, 'scale': 1}
 
 GraphAutoOpenHTML = False  # Auto open external HTML files [True/False]
+
+plotlySettings = [ext_file, staticImageSize, notebookGraphicOutputs, notebookGraphicInteraction, GraphAutoOpenHTML]

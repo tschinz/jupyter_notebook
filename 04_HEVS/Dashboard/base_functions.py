@@ -36,11 +36,11 @@ import nbwavedrom
 from base_config import *
 
 # import hevslib
-from hevslib.general import *
-from hevslib.pandas import *
-from hevslib.plotly import *
-from hevslib.time import *
-from hevslib.md import *
+from hevslib.hevslib.general import *
+from hevslib.hevslib.pandas import *
+from hevslib.hevslib.plotly import *
+from hevslib.hevslib.time import *
+from hevslib.hevslib.md import *
 
 
 ###############################################################################
@@ -78,7 +78,7 @@ def projectPlotCombined(df, df_col, projectDf, projectCol, projectConf, outputGr
   fig.update_yaxes(title_text=df_col["hours"], secondary_y=False)
   fig.update_yaxes(title_text='CHF', secondary_y=True)
   graphFilename = (title + plotlySettings[0]).replace(" ", "_")
-  plot_figure(outputGraphDir + graphFilename, fig, plotlySettings[1], plotlySettings[2], plotlySettings[3], plotlySettings[4])
+  plotFigure(outputGraphDir + graphFilename, fig, plotlySettings[1], plotlySettings[2], plotlySettings[3], plotlySettings[4])
   
   return outputGraphDir + graphFilename
   
@@ -105,7 +105,7 @@ def projectBarBudget(df, df_col, projectDf, projectCol, projectConf, outputGraph
                     )
   fig.update_yaxes(title_text='CHF')
   graphFilename = (title + plotlySettings[0]).replace(" ", "_")
-  plot_figure(outputGraphDir + graphFilename, fig, plotlySettings[1], plotlySettings[2], plotlySettings[3], plotlySettings[4])
+  plotFigure(outputGraphDir + graphFilename, fig, plotlySettings[1], plotlySettings[2], plotlySettings[3], plotlySettings[4])
   return outputGraphDir + graphFilename
   
 def projectLinesHours(df, df_col, projectDf, projectCol, projectConf, outputGraphDir, ext_file):
@@ -128,7 +128,7 @@ def projectLinesHours(df, df_col, projectDf, projectCol, projectConf, outputGrap
                     )
   fig.update_yaxes(title_text=df_col["hours"])
   graphFilename = (title + plotlySettings[0]).replace(" ", "_")
-  plot_figure(outputGraphDir + graphFilename, fig, plotlySettings[1], plotlySettings[2], plotlySettings[3], plotlySettings[4])
+  plotFigure(outputGraphDir + graphFilename, fig, plotlySettings[1], plotlySettings[2], plotlySettings[3], plotlySettings[4])
   return outputGraphDir + graphFilename
 
 def projectPieCollaborators(df1, df2, df_col, projectDf, projectCol, projectConf, outputGraphDir, plotlySettings):
@@ -164,7 +164,7 @@ def projectPieCollaborators(df1, df2, df_col, projectDf, projectCol, projectConf
   fig = go.Figure(data=data,layout=layout)
     
   graphFilename = (title + plotlySettings[0]).replace(" ", "_")
-  plot_figure(outputGraphDir + graphFilename, fig, plotlySettings[1], plotlySettings[2], plotlySettings[3], plotlySettings[4])
+  plotFigure(outputGraphDir + graphFilename, fig, plotlySettings[1], plotlySettings[2], plotlySettings[3], plotlySettings[4])
   return outputGraphDir + graphFilename
 
 
@@ -200,8 +200,9 @@ def projectPieBudgetActivity(df1, df3, df_col, projectDf, projectCol, projectCon
                   hoverinfo='label+percent+value',
                   domain=dict(x=[0.6,1.0]))
   
-  title = projectConf[0] + " - " + filterRows(projectDf, [projectCol["project_number"], [projectConf[0]]])[projectCol["acronym"]].iloc[0] + " Project Statistics"
-  layout = go.Layout(title={'text': title, 'x': 0.5, 'y': 0.9},
+  title = projectConf[0] + " " + filterRows(projectDf, [projectCol["project_number"], [projectConf[0]]])[projectCol["acronym"]].iloc[0] + " Project Statistics"
+  title_graph = "Project Statistics"
+  layout = go.Layout(title={'text': title_graph, 'x': 0.5, 'y': 0.9},
                      #annotations=[ann1,ann2],
                      # Hide legend if you want
                      showlegend=False
@@ -211,7 +212,7 @@ def projectPieBudgetActivity(df1, df3, df_col, projectDf, projectCol, projectCon
   fig = go.Figure(data=data,layout=layout)
     
   graphFilename = (title + plotlySettings[0]).replace(" ", "_")
-  plot_figure(outputGraphDir + graphFilename, fig, plotlySettings[1], plotlySettings[2], plotlySettings[3], plotlySettings[4])
+  plotFigure(outputGraphDir + graphFilename, fig, plotlySettings[1], plotlySettings[2], plotlySettings[3], plotlySettings[4])
   return outputGraphDir + graphFilename
 
 def projectPieCollaborators(df2, df_col, projectDf, projectCol, projectConf, outputGraphDir, plotlySettings):
@@ -234,8 +235,9 @@ def projectPieCollaborators(df2, df_col, projectDf, projectCol, projectConf, out
                   textinfo='label+percent+value',
                   hoverinfo='label+percent+value',
                   domain=dict(x=[0.6,1.0]))
-  title = projectConf[0] + " - " + filterRows(projectDf, [projectCol["project_number"], [projectConf[0]]])[projectCol["acronym"]].iloc[0] + " Split by Collaborator"  
-  layout = go.Layout(title={'text': title, 'x': 0.5, 'y': 0.9},
+  title = projectConf[0] + " " + filterRows(projectDf, [projectCol["project_number"], [projectConf[0]]])[projectCol["acronym"]].iloc[0] + " Split by Collaborator"  
+  title_graph = "Split by Collaborator"  
+  layout = go.Layout(title={'text': title_graph, 'x': 0.5, 'y': 0.9},
                      #annotations=[ann1,ann2],
                      # Hide legend if you want
                      showlegend=False
@@ -245,7 +247,7 @@ def projectPieCollaborators(df2, df_col, projectDf, projectCol, projectConf, out
   fig = go.Figure(data=data,layout=layout)
     
   graphFilename = (title + plotlySettings[0]).replace(" ", "_")
-  plot_figure(outputGraphDir + graphFilename, fig, plotlySettings[1], plotlySettings[2], plotlySettings[3], plotlySettings[4])
+  plotFigure(outputGraphDir + graphFilename, fig, plotlySettings[1], plotlySettings[2], plotlySettings[3], plotlySettings[4])
   return outputGraphDir + graphFilename
 
 
@@ -270,30 +272,30 @@ def projectReport(df1, df2, df3, ash_col, projectDf, projectCol, projectConf, ou
   basicStats.append("HEI Budget Remaining: {:d} CHF".format(int(df3[ash_col['remaining_budget']].iloc[-1])))
   basicStats.append("HEI Montlhy Budget: {:d} CHF".format(int(df3[ash_col['monthly_budget']].iloc[0])))
   basicStats.append("HEI Month Remaining: ~{:.2f} Months".format(df3[ash_col['remaining_budget']].iloc[0]/df3[ash_col['monthly_budget']].iloc[0]))
-  mdContent += mdList(basicStats) + mdlinesep()
+  mdContent += mdList(basicStats) + mdLinesep()
   
   # Pie charts
   
   imagePath = projectPieBudgetActivity(df1, df3, ash_col, projectDf, projectCol, projectConf, outputImgDir, plotlySettings)
-  mdContent += mdImage("." + os.sep + img_subdir + os.path.basename(imagePath), "Project Pie Budget") + mdlinesep()
+  mdContent += mdImage("." + os.sep + img_subdir + os.path.basename(imagePath), "Project Pie Budget") + mdLinesep()
   imagePath = projectPieCollaborators(df2, ash_col, projectDf, projectCol, projectConf, outputImgDir, plotlySettings)
-  mdContent += mdImage("." + os.sep + img_subdir + os.path.basename(imagePath), "Project Pie Collaborators") + mdlinesep()
+  mdContent += mdImage("." + os.sep + img_subdir + os.path.basename(imagePath), "Project Pie Collaborators") + mdLinesep()
     
   # Bar charts
   imagePath = projectPlotCombined(df3, ash_col, projectDf, projectCol, projectConf, outputImgDir, plotlySettings)
-  mdContent += mdImage("." + os.sep + img_subdir + os.path.basename(imagePath), "Project Plot Combined") + mdlinesep()
+  mdContent += mdImage("." + os.sep + img_subdir + os.path.basename(imagePath), "Project Plot Combined") + mdLinesep()
   imagePath = projectBarBudget(df3, ash_col, projectDf, projectCol, projectConf, outputImgDir, plotlySettings)
-  mdContent += mdImage("." + os.sep + img_subdir + os.path.basename(imagePath), "Project Plot Budget") + mdlinesep()
+  mdContent += mdImage("." + os.sep + img_subdir + os.path.basename(imagePath), "Project Plot Budget") + mdLinesep()
   imagePath = projectLinesHours(df3, ash_col, projectDf, projectCol, projectConf, outputImgDir, plotlySettings)  
-  mdContent += mdImage("." + os.sep + img_subdir + os.path.basename(imagePath), "Project Plot Hours") + mdlinesep()
+  mdContent += mdImage("." + os.sep + img_subdir + os.path.basename(imagePath), "Project Plot Hours") + mdLinesep()
 
-  mdContent += mdlinesep() + mdlinesep() + mdItalics("Report automatically generated - (c) zas")
+  mdContent += mdLinesep() + mdLinesep() + mdItalics("Report automatically generated - (c) zas")
   
   filePath = (outputMdDir + projectConf[0] + "_" + filterRows(projectDf, [projectCol["project_number"], [projectConf[0]]])[projectCol["title_humanreadable"]].iloc[0]).replace(" ", "_")
   mdFilePath = (filePath + ".md")
   
-  print_file(mdContent, mdFilePath, fileoutput=True, consoleoutput=False,  append=False)
-  generate_report(mdFilePath, outputPdfDir, verbose)
+  printFile(mdContent, mdFilePath, fileoutput=True, consoleoutput=False,  append=False)
+  genMd2Pdf(mdFilePath, outputPdfDir, verbose=verbose)
 
   if verbose >=1:
      print("Report created: " + filePath + ".pdf")

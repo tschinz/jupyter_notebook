@@ -13,7 +13,7 @@
 import enum
 import pandas as pd
 
-from hevslib.plotly import *
+from hevslib.hevslib.plotly import *
 
 ###############################################################################
 # Constants
@@ -21,7 +21,7 @@ from hevslib.plotly import *
 # 0 = no output
 # 1 = normal output
 # 2 = verbose output
-verbose = 1
+verbose = 2
 
 # Data Storage constants
 data_inputDir = "in"

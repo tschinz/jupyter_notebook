@@ -12,8 +12,12 @@
 ###############################################################################
 import enum
 import pandas as pd
+import sys 
+sys.path.append("hevslib")
 
-from hevslib.hevslib.plotly import *
+
+
+from hevslib.plotly import *
 
 ###############################################################################
 # Constants

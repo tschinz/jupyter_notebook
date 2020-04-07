@@ -36,11 +36,11 @@ import nbwavedrom
 from base_config import *
 
 # import hevslib
-from hevslib.hevslib.general import *
-from hevslib.hevslib.pandas import *
-from hevslib.hevslib.plotly import *
-from hevslib.hevslib.time import *
-from hevslib.hevslib.md import *
+from hevslib.general import *
+from hevslib.pandas import *
+from hevslib.plotly import *
+from hevslib.time import *
+from hevslib.md import *
 
 
 ###############################################################################
@@ -264,18 +264,25 @@ def projectReport(df1, df2, df3, ash_col, projectDf, projectCol, projectConf, ou
   # Title
   mdContent += mdH1("Project Report - {} - {}".format(projectConf[0], filterRows(projectDf, [projectCol["project_number"], [projectConf[0]]])[projectCol["title_humanreadable"]].iloc[0]))
   # Basic Stats
+  date_exported = filterRows(projectDf, [projectCol["project_number"], [projectConf[0]]])[projectCol["updated"]].iloc[0]
+  project_begin = filterRows(projectDf, [projectCol["project_number"], [projectConf[0]]])[projectCol["date_begin"]].iloc[0].strftime('%d.%m.%Y')
+  project_end = filterRows(projectDf, [projectCol["project_number"], [projectConf[0]]])[projectCol["date_end"]].iloc[0].strftime('%d.%m.%Y')
+  project_budget = int(df3[ash_col['total_budget']].iloc[0])
+  project_monthly_budget = int(df3[ash_col['monthly_budget']].iloc[0])
+  project_budget_remaining = int(df3[ash_col['remaining_budget']].iloc[-1])
+  remaining_time = filterRows(projectDf, [projectCol["project_number"], [projectConf[0]]])[projectCol["date_end"]].iloc[0] - get_today_date()
+  project_monthly_budget_remaining = int(df3[ash_col['remaining_budget']].iloc[-1]) / (remaining_time.total_seconds()*second2month)
+  
+  projectDf['duration_month'] = year2month* (projectDf[projectCol["date_end"]].dt.year - projectDf[projectCol["date_begin"]].dt.year) + (projectDf[projectCol["date_end"]].dt.month - projectDf[projectCol["date_begin"]].dt.month + (projectDf[projectCol["date_end"]].dt.day - projectDf[projectCol["date_begin"]].dt.day)*day2month)
+  
   basicStats = []
-  basicStats.append("Report Data exported: {}".format(filterRows(projectDf, [projectCol["project_number"], [projectConf[0]]])[projectCol["updated"]].iloc[0]))
-  basicStats.append("Project begin: {}".format(filterRows(projectDf, [projectCol["project_number"], [projectConf[0]]])[projectCol["date_begin"]].iloc[0]))#.dt.strftime('%d.%m.%Y')))
-  basicStats.append("Project end: {}".format(filterRows(projectDf, [projectCol["project_number"], [projectConf[0]]])[projectCol["date_end"]].iloc[0]))#.strftime('%d.%m.%Y')))
-  basicStats.append("HEI Project Budget: {:d} CHF".format(int(df3[ash_col['total_budget']].iloc[0])))
-  basicStats.append("HEI Budget Remaining: {:d} CHF".format(int(df3[ash_col['remaining_budget']].iloc[-1])))
-  basicStats.append("HEI Montlhy Budget: {:d} CHF".format(int(df3[ash_col['monthly_budget']].iloc[0])))
-  basicStats.append("HEI Month Remaining: ~{:.2f} Months".format(df3[ash_col['remaining_budget']].iloc[0]/df3[ash_col['monthly_budget']].iloc[0]))
+  basicStats.append("SageX Data exported: {}".format(date_exported))
+  basicStats.append("Project: {} - {}".format(project_begin, project_end))
+  basicStats.append("HEI Project Budget: {:d} CHF = {:d} CHF/Month".format(project_budget, project_monthly_budget))
+  basicStats.append("HEI Budget Remaining: {:d} CHF = ~{:.2f} CHF/Month".format(project_budget_remaining, project_monthly_budget_remaining))
   mdContent += mdList(basicStats) + mdLinesep()
   
   # Pie charts
-  
   imagePath = projectPieBudgetActivity(df1, df3, ash_col, projectDf, projectCol, projectConf, outputImgDir, plotlySettings)
   mdContent += mdImage("." + os.sep + img_subdir + os.path.basename(imagePath), "Project Pie Budget") + mdLinesep()
   imagePath = projectPieCollaborators(df2, ash_col, projectDf, projectCol, projectConf, outputImgDir, plotlySettings)

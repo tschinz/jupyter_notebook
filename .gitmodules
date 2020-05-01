@@ -1,4 +1,4 @@
-[submodule "04_HEVS/Dashboard/hevslib"]
-	path = 04_HEVS/Dashboard/hevslib
-	url = https://gitlab.hevs.ch/SPL/miscellaneous/python-hevslib
+[submodule "04_HEVS/toggl/hevslib"]
+	path = 04_HEVS/toggl/hevslib
+	url = https://gitlab.hevs.ch/SPL/hevslib-python
 	branch = master

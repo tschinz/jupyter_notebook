@@ -1,6 +1,12 @@
+# Apple files
+.DS_STORE
+
 #.ipynb checkpoints
 .ipynb_checkpoints/
 output/
+
+#manim
+media/
 
 # Ingnore Constellium data files
 04_HEVS/ASI/basicdataanalysis/PressAgingOven/input/

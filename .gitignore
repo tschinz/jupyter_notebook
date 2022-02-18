@@ -6,7 +6,10 @@
 output/
 
 #manim
-media/
+**/media/images/
+**/media/jupyter/
+**/media/texts/
+partial_movie_files/
 
 # Ingnore Constellium data files
 04_HEVS/ASI/basicdataanalysis/PressAgingOven/input/
